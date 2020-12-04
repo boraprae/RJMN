@@ -34,13 +34,18 @@
                     "endDate": "Male",
                     "oriPrice": "CS",
                     "salePrice": "IT",
+                    "peoplePerPro": "5",
                     "proDetail": "อิ่มฟินแบบจุกๆกันไปเลย 1ฟรี1 อิ่ม อร่อยแบบจุกๆกันไปเลย คุ้มกว่านี้ไม่มีอีกแล้ว❗️",
                     "proImg": "/img/cover4.jpg",
                 }
             ];
-            $("#btnAddpro").click(function () {
-
+            $("#btnAddNewPro").click(function () {
+                $("#modalAddpro").modal("toggle");
             });
+
+            $("#btnAddConfirm").click(function () {
+                $('#modalAddpro').modal('hide');
+            })
 
             //create data table
             var table = $("#promotionTable").DataTable({
@@ -51,9 +56,9 @@
                     { data: "endDate", title: "End date" },
                     { data: "oriPrice", title: "Original Price" },
                     { data: "salePrice", title: "Sale Price" },
+                    { data: "peoplePerPro", title: "People per promotion" },
                     { data: "proDetail", title: "Detail" },
                     { data: "proImg", title: "Image" },
-                    { title: "Action", defaultContent: "<button class='btn btn-primary'>More Info</button>" }
                 ]
             });
         });
@@ -126,7 +131,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="adminBussinessInsight.html">
+                <a class="nav-link" href="adminBusinessInsight.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Business Insights</span></a>
             </li>
@@ -192,6 +197,8 @@
                         <h1 class="h3 mb-0 text-gray-800"><b>My Promotion</b> </h1>
                     </div>
 
+                    <button class="btn btn-primary" id="btnAddNewPro">Add new promotion</button>
+
                     <!-- Promotion DataTales -->
                     <div class="card shadow mb-4 mt-4">
                         <div class="card-header py-3">
@@ -208,38 +215,83 @@
                     <!-- Divider -->
                     <hr class="sidebar-divider">
 
-                    <div class="col-lg-8 mb-4 mx-auto">
-
-
-                        <!-- Promotion Infomation -->
-                        
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary" id="promootionNameModal">Illustrations</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 30rem;"
-                                        src="/img/cover1.jpg" id="promotionImgModal">
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalAddpro" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank"
-                                        rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                    constantly updated collection of beautiful svg images that you can use
-                                    completely free and without attribution!</p>
+                                <div class="modal-body">
+                                    <div class="p-5">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Add New Promotion!</h1>
+                                        </div>
+                                        <form class="user">
+                                            <div class="form-group row">
+                                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                                    <input type="text" class="form-control form-control-user"
+                                                        id="txtProName" placeholder="Promotion Name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                                    <input type="text" class="form-control form-control-user"
+                                                        id="txtpeoplePerPro" placeholder="People per Promotion">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="password" class="form-control form-control-user"
+                                                        id="txtOriPrice" placeholder="Original Price">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="password" class="form-control form-control-user"
+                                                        id="txtSalePrice" placeholder="Sale Price">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <div class="ml-3">Start Date</div>
+                                                    <input type="date" class="form-control form-control-user"
+                                                        id="txtStartDate" placeholder="Start Date">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="ml-3">End Date</div>
+                                                    <input type="date" class="form-control form-control-user"
+                                                        id="txtEndDate" placeholder="End Date">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row" style="height: 30%;">
+                                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                                    <input type="text" class="form-control form-control-user"
+                                                        id="txtDetail" placeholder="Description">
+                                                </div>
+                                            </div>
+
+                                            <a class="btn btn-success btn-user btn-block" id="btnAddConfirm">
+                                                Add
+                                            </a>
+                                            <hr>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
-
                     </div>
-                    <!-- /.container-fluid -->
-
                 </div>
-                <!-- End of Main Content -->
-
-
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- /.container-fluid -->
+
+            <!-- End of Main Content -->
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -255,50 +307,55 @@
                 </div>
             </footer>
             <!-- End of Footer -->
+
+
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <!-- End of Page Wrapper -->
 
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="js/demo/datatables-demo.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 
