@@ -167,6 +167,7 @@
         .product-removal {
             float: left;
             width: 9%;
+            color: #2bbb6c;
         }
 
         .product-line-price {
@@ -314,7 +315,7 @@
             font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
         }
 
-        .checkout {
+        .orderinfo {
             float: right;
             border: 0;
             margin-top: 10px;
@@ -513,8 +514,9 @@
                         </div>
                     </div>
 
-                    <button class="checkout">Order Informations</button>
 
+                    <input class="orderinfo" type=button onClick="location.href='MyPurchaseStatus.html'"
+                        value='Order Informations'>
                 </div>
 
             </div>
@@ -525,7 +527,10 @@
 
     </div>
     </div>
+    <script>
 
+
+    </script>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
