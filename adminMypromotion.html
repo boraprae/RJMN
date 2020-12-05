@@ -23,43 +23,104 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
         $(document).ready(function () {
 
-            let dataSet = [
-                {
-                    "proName": "6231302001",
-                    "startDate": "Ethan Hunt",
-                    "endDate": "Male",
-                    "oriPrice": "CS",
-                    "salePrice": "IT",
-                    "peoplePerPro": "5",
-                    "proDetail": "อิ่มฟินแบบจุกๆกันไปเลย 1ฟรี1 อิ่ม อร่อยแบบจุกๆกันไปเลย คุ้มกว่านี้ไม่มีอีกแล้ว❗️",
-                    "proImg": "/img/cover4.jpg",
-                }
-            ];
-            $("#btnAddNewPro").click(function () {
-                $("#modalAddpro").modal("toggle");
-            });
+            $(document).ready(function () {
 
-            $("#btnAddConfirm").click(function () {
-                $('#modalAddpro').modal('hide');
-            })
+                let dataSet = [
+                    {
+                        "proCode": "1",
+                        "proName": "ไก่จ๋าได้ยินไหมว่าเสียงใคร",
+                        "startDate": "20-11-2020",
+                        "endDate": "08-12-2020",
+                        "oriPrice": "1000",
+                        "salePrice": "50",
+                        "peoplePerPro": "5",
+                        "proDetail": "อิ่มฟินแบบจุกๆกันไปเลย 1ฟรี1 อิ่ม อร่อยแบบจุกๆกันไปเลย คุ้มกว่านี้ไม่มีอีกแล้ว❗️",
+                        "proImg": "/img/cover4.jpg",
+                    }
+                ];
 
-            //create data table
-            var table = $("#promotionTable").DataTable({
-                data: dataSet,
-                columns: [
-                    { data: "proName", title: "Promotion Name" },
-                    { data: "startDate", title: "Start Date" },
-                    { data: "endDate", title: "End date" },
-                    { data: "oriPrice", title: "Original Price" },
-                    { data: "salePrice", title: "Sale Price" },
-                    { data: "peoplePerPro", title: "People per promotion" },
-                    { data: "proDetail", title: "Detail" },
-                    { data: "proImg", title: "Image" },
-                ]
+                //create data table
+                var table = $("#promotionTable").DataTable({
+                    data: dataSet,
+                    columns: [
+                        { data: "proCode", title: "Code" },
+                        { data: "proName", title: "Promotion Name" },
+                        { data: "oriPrice", title: "Original Price" },
+                        { data: "salePrice", title: "Sale Price" },
+                        { data: "startDate", title: "Start Date" },
+                        { data: "endDate", title: "End date" },
+                        { data: "peoplePerPro", title: "People per promotion" },
+                        { data: "proDetail", title: "Detail" },
+                        { data: "proImg", title: "Image" },
+                    ]
+                });
+
+                //add promotion button
+                $("#btnAddNewPro").click(function () {
+
+                    $("#modalAddpro").modal("show");
+                    $("#txtproCode").val("");
+                    $("#txtProName").val("");
+                    $("#txtpeoplePerPro").val("");
+                    $("#txtOriPrice").val("");
+                    $("#txtSalePrice").val("");
+                    $("#txtStartDate").val("");
+                    $("#txtEndDate").val("");
+                    $("#txtproDetail").val("");
+
+                    //Add data to table
+                    $("#btnAddConfirm").click(function () {
+
+                        //get value
+                        const proCode = $("#txtproCode").val();
+                        const proName = $("#txtProName").val();
+                        const peoplePerPro = $("#txtpeoplePerPro").val();
+                        const oriPrice = $("#txtOriPrice").val();
+                        const salePrice = $("#txtSalePrice").val();
+                        const startDate = $("#txtStartDate").val();
+                        const endDate = $("#txtEndDate").val();
+                        const proDetail = $("#txtproDetail").val();
+
+                        //check if the input already have
+                        let check;
+                        for (let i = 0; i < dataSet.length; i++) {
+                            //cancel same promotion code
+                            if (dataSet[i].proCode == proCode) {
+                                check = false;
+                                break;
+                            }
+                        }
+                        if (check == false) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Sorry',
+                                text: 'This code already use.',
+                            });
+                        } else {
+                            dataSet.push({
+                                "proCode": proCode,
+                                "proName": proName,
+                                "startDate": startDate,
+                                "endDate": endDate,
+                                "oriPrice": oriPrice,
+                                "salePrice": salePrice,
+                                "peoplePerPro": peoplePerPro,
+                                "proDetail": proDetail,
+                                "proImg": "none",
+                                "proStatus": "Available",
+                            });
+                            table.clear();
+                            table.rows.add(dataSet).draw();
+                        }
+                        $('#modalAddpro').modal('hide');
+                    })
+                });
+
             });
         });
     </script>
@@ -77,7 +138,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-cogs"></i>
+                    <i class="fas fa-heart"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">RJMN<sup> Admin </sup></div>
             </a>
@@ -131,7 +192,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="adminBusinessInsight.html">
+                <a class="nav-link" href="adminBussinessInsight.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Business Insights</span></a>
             </li>
@@ -230,27 +291,33 @@
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Add New Promotion!</h1>
                                         </div>
+                                        <!-- Form Add Promotion -->
                                         <form class="user">
-                                            <div class="form-group row">
+                                            <div class="form-group row" id="formRegister" method="POST" enctype="multipart/form-data">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">
                                                     <input type="text" class="form-control form-control-user"
                                                         id="txtProName" placeholder="Promotion Name">
                                                 </div>
                                             </div>
+
                                             <div class="form-group row">
-                                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <input type="text" class="form-control form-control-user"
+                                                        id="txtproCode" placeholder="Promotion Code" maxlength="5">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="number" class="form-control form-control-user"
                                                         id="txtpeoplePerPro" placeholder="People per Promotion">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="password" class="form-control form-control-user"
+                                                    <input type="number" class="form-control form-control-user"
                                                         id="txtOriPrice" placeholder="Original Price">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="password" class="form-control form-control-user"
+                                                    <input type="number" class="form-control form-control-user"
                                                         id="txtSalePrice" placeholder="Sale Price">
                                                 </div>
                                             </div>
@@ -268,13 +335,23 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row" style="height: 30%;">
+                                            <div class="form-group row">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">
                                                     <input type="text" class="form-control form-control-user"
-                                                        id="txtDetail" placeholder="Description">
+                                                        id="txtproDetail" placeholder="Description" maxlength="200">
                                                 </div>
                                             </div>
-
+                                            <div class="form-group row">
+                                                <div class="ml-3">Promotion Photo</div>
+                                                <input type="file" name="fileUpload" class="mt-3 ml-3">
+                                                    <!-- <div class="input-group ml-3">
+                                                        <div class="custom-file">
+                                                          <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                            aria-describedby="inputGroupFileAddon01">
+                                                          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                        </div>
+                                                    </div> -->
+                                            </div>
                                             <a class="btn btn-success btn-user btn-block" id="btnAddConfirm">
                                                 Add
                                             </a>
@@ -286,12 +363,13 @@
 
                         </div>
                     </div>
+
                 </div>
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- /.container-fluid -->
-
             <!-- End of Main Content -->
+
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -307,7 +385,6 @@
                 </div>
             </footer>
             <!-- End of Footer -->
-
 
         </div>
         <!-- End of Content Wrapper -->
