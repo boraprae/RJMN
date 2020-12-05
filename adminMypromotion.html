@@ -14,6 +14,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.2/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+
     <!-- Custom fonts-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -26,103 +28,122 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
+        var promotionTable;
+
         $(document).ready(function () {
 
-            $(document).ready(function () {
+            //create data table
+            promotionTable = $("#promotionTable").DataTable({
+                ajax: {
+                    url: "/addPromotion",
+                },
+                columns: [
+                    { data: "proCode", title: "Code" },
+                    { data: "proName", title: "Promotion Name" },
+                    { data: "oriPrice", title: "Original Price" },
+                    { data: "salePrice", title: "Sale Price" },
+                    { data: "startDate", title: "Start Date" },
+                    { data: "endDate", title: "End date" },
+                    { data: "peoplePerPro", title: "People per promotion" },
+                    { data: "proDetail", title: "Detail" },
+                    { data: "proImg", title: "Image" },
+                ]
+            });
 
-                let dataSet = [
-                    {
-                        "proCode": "1",
-                        "proName": "ไก่จ๋าได้ยินไหมว่าเสียงใคร",
-                        "startDate": "20-11-2020",
-                        "endDate": "08-12-2020",
-                        "oriPrice": "1000",
-                        "salePrice": "50",
-                        "peoplePerPro": "5",
-                        "proDetail": "อิ่มฟินแบบจุกๆกันไปเลย 1ฟรี1 อิ่ม อร่อยแบบจุกๆกันไปเลย คุ้มกว่านี้ไม่มีอีกแล้ว❗️",
-                        "proImg": "/img/cover4.jpg",
-                    }
-                ];
+            //add promotion button
+            $("#btnAddNewPro").click(function () {
 
-                //create data table
-                var table = $("#promotionTable").DataTable({
-                    data: dataSet,
-                    columns: [
-                        { data: "proCode", title: "Code" },
-                        { data: "proName", title: "Promotion Name" },
-                        { data: "oriPrice", title: "Original Price" },
-                        { data: "salePrice", title: "Sale Price" },
-                        { data: "startDate", title: "Start Date" },
-                        { data: "endDate", title: "End date" },
-                        { data: "peoplePerPro", title: "People per promotion" },
-                        { data: "proDetail", title: "Detail" },
-                        { data: "proImg", title: "Image" },
-                    ]
-                });
+                $("#modalAddpro").modal("show");
+                // $("#txtproCode").val("");
+                // $("#txtProName").val("");
+                // $("#txtpeoplePerPro").val("");
+                // $("#txtOriPrice").val("");
+                // $("#txtSalePrice").val("");
+                // $("#txtStartDate").val("");
+                // $("#txtEndDate").val("");
+                // $("#txtproDetail").val("");
 
-                //add promotion button
-                $("#btnAddNewPro").click(function () {
 
-                    $("#modalAddpro").modal("show");
-                    $("#txtproCode").val("");
-                    $("#txtProName").val("");
-                    $("#txtpeoplePerPro").val("");
-                    $("#txtOriPrice").val("");
-                    $("#txtSalePrice").val("");
-                    $("#txtStartDate").val("");
-                    $("#txtEndDate").val("");
-                    $("#txtproDetail").val("");
+                // //Add data to table
+                // $("#formAddPro").submit(function (e) {
+                //     e.preventDefault();
 
-                    //Add data to table
-                    $("#btnAddConfirm").click(function () {
-
-                        //get value
-                        const proCode = $("#txtproCode").val();
-                        const proName = $("#txtProName").val();
-                        const peoplePerPro = $("#txtpeoplePerPro").val();
-                        const oriPrice = $("#txtOriPrice").val();
-                        const salePrice = $("#txtSalePrice").val();
-                        const startDate = $("#txtStartDate").val();
-                        const endDate = $("#txtEndDate").val();
-                        const proDetail = $("#txtproDetail").val();
-
-                        //check if the input already have
-                        let check;
-                        for (let i = 0; i < dataSet.length; i++) {
-                            //cancel same promotion code
-                            if (dataSet[i].proCode == proCode) {
-                                check = false;
-                                break;
-                            }
-                        }
-                        if (check == false) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Sorry',
-                                text: 'This code already use.',
-                            });
-                        } else {
-                            dataSet.push({
-                                "proCode": proCode,
-                                "proName": proName,
-                                "startDate": startDate,
-                                "endDate": endDate,
-                                "oriPrice": oriPrice,
-                                "salePrice": salePrice,
-                                "peoplePerPro": peoplePerPro,
-                                "proDetail": proDetail,
-                                "proImg": "none",
-                                "proStatus": "Available",
-                            });
-                            table.clear();
-                            table.rows.add(dataSet).draw();
-                        }
-                        $('#modalAddpro').modal('hide');
-                    })
-                });
+                //     //Close Modal
+                //     $("modalAddpro").modal("hide");
+                //     const dataForm = new FormData(this);
+                //     $.ajax({
+                //         type: "GET",
+                //         url: "/promotion/add",
+                //         data: dataForm,
+                //         contentType: false,
+                //         processData: false,
+                //         success: function (response) {
+                //             alert(response);
+                //         },
+                //         error: function (xhr) {
+                //             alert(xhr.responseText);
+                //         }
+                //     });
 
             });
+
+            //Add data to table
+            $("#btnAddConfirm").click(function () {
+                const newPromotion = addPromotionInfo();
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/promotion/add",
+                    data: newPromotion,
+                    success: function (response) {
+
+                    }
+                }).done(function (data, state, xhr) {
+                    Swal.fire(`Add "${newPromotion.proName}" complete!`);
+                    $("#modalAddUser").modal("hide");
+                    tableUser.ajax.reload();
+
+                }).fail(function (xhr, state) {
+                    Swal.fire(xhr.responseText);
+                });
+
+                //get value
+                // const proCode = $("#txtproCode").val();
+                // const proName = $("#txtProName").val();
+                // const peoplePerPro = $("#txtpeoplePerPro").val();
+                // const oriPrice = $("#txtOriPrice").val();
+                // const salePrice = $("#txtSalePrice").val();
+                // const startDate = $("#txtStartDate").val();
+                // const endDate = $("#txtEndDate").val();
+                // const proDetail = $("#txtproDetail").val();
+                // //img
+
+                // $.ajax({
+                //     type: "GET",
+                //     url: "/promotion/add",
+                //     data: { proCode: proCode, proName: proName, peoplePerPro: peoplePerPro, oriPrice: oriPrice, salePrice: salePrice, startDate: startDate, endDate: endDate, proDetail: proDetail }
+                // }).done(function (data, state, xhr) {
+                //     alert("OK");
+                //     window.location.replace(data);
+                // }).fail(function (xhr, state) {
+                //     alert("Fail");
+                // })
+
+                // $('#modalAddpro').modal('hide');
+            })
         });
+
+        function addPromotionInfo() {
+            const proCode = $("#txtproCode").val();
+            const proName = $("#txtProName").val();
+            const peoplePerPro = $("#txtpeoplePerPro").val();
+            const oriPrice = $("#txtOriPrice").val();
+            const salePrice = $("#txtSalePrice").val();
+            const startDate = $("#txtStartDate").val();
+            const endDate = $("#txtEndDate").val();
+            const proDetail = $("#txtproDetail").val();
+            return { "proCode": proCode, "proName": proName, "peoplePerPro": peoplePerPro, "oriPrice": oriPrice, "salePrice": salePrice, "startDate": startDate, "endDate": endDate, "proDetail": proDetail };
+        }
     </script>
 
 </head>
@@ -226,14 +247,13 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-fw fa-user mr-2"></i>
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="adminName">Orawan
-                                    Khongthip</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="adminName">Admin</span>
                             </a>
 
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="profileAdmin.html">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -292,8 +312,9 @@
                                             <h1 class="h4 text-gray-900 mb-4">Add New Promotion!</h1>
                                         </div>
                                         <!-- Form Add Promotion -->
-                                        <form class="user">
-                                            <div class="form-group row" id="formRegister" method="POST" enctype="multipart/form-data">
+                                        <form class="user" id="formAddPro">
+                                            <div class="form-group row" id="formRegister" method="POST"
+                                                enctype="multipart/form-data">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">
                                                     <input type="text" class="form-control form-control-user"
                                                         id="txtProName" placeholder="Promotion Name">
@@ -343,8 +364,8 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="ml-3">Promotion Photo</div>
-                                                <input type="file" name="fileUpload" class="mt-3 ml-3">
-                                                    <!-- <div class="input-group ml-3">
+                                                <input type="file" name="fileUpload" class="mt-3 ml-3" id="addProImg">
+                                                <!-- <div class="input-group ml-3">
                                                         <div class="custom-file">
                                                           <input type="file" class="custom-file-input" id="inputGroupFile01"
                                                             aria-describedby="inputGroupFileAddon01">
@@ -352,9 +373,11 @@
                                                         </div>
                                                     </div> -->
                                             </div>
-                                            <a class="btn btn-success btn-user btn-block" id="btnAddConfirm">
+                                            <button class="btn btn-success btn-user btn-block"
+                                                id="btnAddConfirm">Add</button>
+                                            <!-- <a class="btn btn-success btn-user btn-block" id="btnAddConfirm">
                                                 Add
-                                            </a>
+                                            </a> -->
                                             <hr>
                                         </form>
                                     </div>
@@ -411,21 +434,24 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="index.html">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script> -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://res.cloudinary.com/borahaewebpro/raw/upload/v1607198738/bootstrap.min_qzluvs.js"></script> -->
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- <script src="https://res.cloudinary.com/borahaewebpro/raw/upload/v1607198813/jquery.easing.min_fhlogn.js"></script> -->
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <!-- <script src="https://res.cloudinary.com/borahaewebpro/raw/upload/v1607198621/sb-admin-2.min_cb5zwd.js"></script> -->
 
     <!-- Page level plugins -->
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
@@ -433,6 +459,7 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+    <!-- <script src="https://res.cloudinary.com/borahaewebpro/raw/upload/v1607198866/datatables-demo_cuzaqh.js"></script> -->
 
 </body>
 
