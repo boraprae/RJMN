@@ -34,7 +34,7 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/1.10.22/dataTables.bootstrap4.css
     "> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 
@@ -65,80 +65,49 @@
                 ]
             });
 
+            // $("#formAddPro").submit(function(e){
+            //     e.preventDefault();
+
+            //     dataForm = new FormData(this);
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "/addpromotions",
+            //         data: dataForm,
+            //         contentType: false,
+            //         processData: false,
+            //         success: function (response) {
+            //             alert(response);
+            //         },
+            //         error: function(xhr){
+            //             alert(xhr.responseText);
+            //         }
+            //     });
+            // });
+
             //Add data to table
-            // $("#btnAddConfirm").click(function () {
+            $("#btnAddConfirm").click(function () {
                 newPromotion = addPromotionInfo();
 
-                //Add data to table
-                $("#formAddPro").submit(function (e) {
-                    e.preventDefault();
+                console.log(newPromotion);
 
-                    //Close Modal
-                    $("#modalAddpro").modal("hide");
-                    dataForm = new FormData(this);
-                    $.ajax({
-                        type: "GET",
-                        url: "/addpromotions",
-                        data: dataForm,
-                        contentType: false,
-                        processData: false,
-                        success: function (response) {
-                            alert(response);
-                        },
-                        error: function (xhr) {
-                            alert(xhr.responseText);
-                        }
-                    });
+                $.ajax({
+                    type: "POST",
+                    url: "/addpromotions",
+                    data: newPromotion,
+                    success: function (response) {
+                        alert(response);
+                    },
+                    error: function(xhr){
+                        alert(xhr.responseText);
+                    }
+                }).done(function (data, state, xhr) {
+                    promotionTable.ajax.reload();
                 });
-
-                // $.ajax({
-                //     type: "POST",
-                //     url: "/addpromotions",
-                //     data: newPromotion,
-                //     contentType: false,
-                //     processData: false,
-                //     success: function (response) {
-                //         alert(response);
-                //     },
-                //     error: function (xhr) {
-                //         alert(xhr.responseText);
-                //     }
-                // }).done(function (data, state, xhr) {
-                //     Swal.fire(`Add "${newPromotion.proName}" complete!`);
-                //     $("#modalAddUser").modal("hide");
-                //     tableUser.ajax.reload();
-
-                // }).fail(function (xhr, state) {
-                //     Swal.fire(xhr.responseText);
-                // });
-
-                //get value
-                // const proCode = $("#txtproCode").val();
-                // const proName = $("#txtProName").val();
-                // const peoplePerPro = $("#txtpeoplePerPro").val();
-                // const oriPrice = $("#txtOriPrice").val();
-                // const salePrice = $("#txtSalePrice").val();
-                // const startDate = $("#txtStartDate").val();
-                // const endDate = $("#txtEndDate").val();
-                // const proDetail = $("#txtproDetail").val();
-                // //img
-
-                // $.ajax({
-                //     type: "GET",
-                //     url: "/promotion/add",
-                //     data: { proCode: proCode, proName: proName, peoplePerPro: peoplePerPro, oriPrice: oriPrice, salePrice: salePrice, startDate: startDate, endDate: endDate, proDetail: proDetail }
-                // }).done(function (data, state, xhr) {
-                //     alert("OK");
-                //     window.location.replace(data);
-                // }).fail(function (xhr, state) {
-                //     alert("Fail");
-                // })
-
-                // $('#modalAddpro').modal('hide');
             });
-        // });
+            
+        });
 
-        function addPromotionInfo() {
+         function addPromotionInfo() {
             const proCode = $("#txtproCode").val();
             const proName = $("#txtProName").val();
             const peoplePerPro = $("#txtpeoplePerPro").val();
@@ -147,7 +116,8 @@
             const startDate = $("#txtStartDate").val();
             const endDate = $("#txtEndDate").val();
             const proDetail = $("#txtproDetail").val();
-            return { "proCode": proCode, "proName": proName, "peoplePerPro": peoplePerPro, "oriPrice": oriPrice, "salePrice": salePrice, "startDate": startDate, "endDate": endDate, "proDetail": proDetail }
+            // const proImg = $("#fileUpload").val();
+            return { "proCode": proCode, "proName": proName, "peoplePerPro": peoplePerPro, "oriPrice": oriPrice, "salePrice": salePrice, "startDate": startDate, "endDate": endDate, "proDetail": proDetail}
         }
     </script>
 
@@ -269,7 +239,8 @@
                         <h1 class="h3 mb-0 text-gray-800"><b>My Promotion</b> </h1>
                     </div>
 
-                    <button class="btn btn-primary" id="btnAddNewPro" data-toggle="modal" data-target="#modalAddpro">Add new promotion</button>
+                    <button class="btn btn-primary" id="btnAddNewPro" data-toggle="modal" data-target="#modalAddpro">Add
+                        new promotion</button>
 
                     <!-- Promotion DataTales -->
                     <div class="card shadow mb-4 mt-4">
@@ -302,8 +273,9 @@
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Add New Promotion!</h1>
                                         </div>
+
                                         <!-- Form Add Promotion -->
-                                        <form class="user" id="formAddPro">
+                                        <form class="user" id="formAddPro" method="POST" enctype="multipart/form-data">
                                             <div class="form-group row" id="formRegister" method="POST"
                                                 enctype="multipart/form-data">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">
@@ -355,7 +327,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="ml-3">Promotion Photo</div>
-                                                <input type="file" name="fileUpload" class="mt-3 ml-3" id="addProImg">
+                                                <input type="file" id="fileUpload" class="mt-3 ml-3">
                                                 <!-- <div class="input-group ml-3">
                                                         <div class="custom-file">
                                                           <input type="file" class="custom-file-input" id="inputGroupFile01"
