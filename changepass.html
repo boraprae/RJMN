@@ -12,6 +12,7 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css2/style.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
     <style>
         body {
@@ -384,31 +385,7 @@
             }
         }
 
-        /* Make more adjustments for phone */
-        @media screen and (max-width: 350px) {
-            .product-removal {
-                float: right;
-            }
-
-            .product-line-price {
-                float: right;
-                clear: left;
-                width: auto;
-                margin-top: 10px;
-            }
-
-            .product .product-line-price:before {
-                content: 'Item Total: $';
-            }
-
-            .totals .totals-item label {
-                width: 60%;
-            }
-
-            .totals .totals-item .totals-value {
-                width: 40%;
-            }
-        }
+     
     </style>
 </head>
 
@@ -433,12 +410,12 @@
                 <li>
                     <a href="#">Profile</a>
                 </li>
-                <li>
-                    <a href="changepass.html">Set Password</a>
-                </li>
-                </li>
                 <li class="active">
-                    <a href="#"><span class="fa fa-shopping-cart mr-3"></span> My Purchase</a>
+                    <a href="#">Set Password</a>
+                </li>
+                </li>
+                <li>
+                    <a href="MyPurchase.html"><span class="fa fa-shopping-cart mr-3"></span> My Purchase</a>
                 </li>
                 <li>
                     <a href="#"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
@@ -450,74 +427,39 @@
         <!-- Page Content  -->
 
         <div class="container px-1 px-md-4 py-5 mx-auto">
-            <h2 class="col-md-4"> My Purchase</h2>
-            <div class="card">
-                 <h4 style="color: #f5f4f4 ;">.</h4>             
+            <h2 class="col-md-4">Set Password</h2>
+            <div class="card ">
+                <br>
+                <h3 class="text-center">Change Password</h3> <br>
 
-                <div class="shopping-cart">
+                    <div class="row color ">
+                <div class="col-lg-4 "></div>
+              
+                        <div class="col-sm-4">
+                            <div class="col-12 ">
+                                <label class="text-dark">Current Password</label>
+                                <div class="form-group pass_show">
+                                    <input type="" value="" class="form-control"
+                                        placeholder="Current Password">
+                                </div>
+                                <label class="text-dark">New Password</label>
+                                <div class="form-group pass_show">
+                                    <input type="" value="" class="form-control"
+                                        placeholder="New Password">
+                                </div>
+                                <label class="text-dark">Confirm Password</label>
+                                <div class="form-group pass_show">
+                                    <input type="" value="" class="form-control"
+                                        placeholder="Confirm Password">
+                                </div>
+                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+                                   <button class="btn btn-primary "> Save</button>
 
-                    <div class="column-labels">
-                        <label class="product-image">Image</label>
-                        <label class="product-details">Product</label>
-                        <label class="product-price">Price</label>
-                        <label class="product-quantity">Quantity</label>
-                        <label class="product-removal">Completed</label>
-                        <label class="product-line-price">Total</label>
-                    </div>
-
-                    <div class="product">
-                        <div class="product-image">
-                            <img src="./images/nike.jpg">
-                        </div>
-                        <div class="product-details">
-                            <div class="product-title">Nike Flex Form TR Women's Sneaker</div>
-                            <p class="product-description"> It has a lightweight, breathable mesh upper with forefoot
-                                cables for a locked-down fit.</p>
-                        </div>
-                        <div class="product-price">12.99</div>
-                        <div class="product-quantity">
-                            <input type="number" value="2" min="1">
-                        </div>
-                        <div class="product-removal">
-
-                            Completed
-
-                        </div>
-                        <div class="product-line-price">25.98</div>
-                    </div>
-
-                    <div class="product">
-                        <div class="product-image">
-                            <img src="./images/adidas.jpg">
-                        </div>
-                        <div class="product-details">
-                            <div class="product-title">ULTRABOOST UNCAGED SHOES</div>
-                            <p class="product-description">Born from running culture, these men's shoes deliver the
-                                freedom of a cage-free design</p>
-                        </div>
-                        <div class="product-price">45.99</div>
-                        <div class="product-quantity">
-                            <input type="number" value="1" min="1">
-                        </div>
-                        <div class="product-removal">
-
-                            Completed
-
-                        </div>
-                        <div class="product-line-price">45.99</div>
-                    </div>
-
-                    <div class="totals">
-                        <div class="totals-item">
-                            <label>Total Price: </label>
-                            <div class="totals-value" id="cart-subtotal">71.97</div>
+                            </div>
                         </div>
                     </div>
-
-
-                    <input class="orderinfo" type=button onClick="location.href='MyPurchaseStatus.html'"
-                        value='Order Informations'>
                 </div>
+
 
             </div>
 
