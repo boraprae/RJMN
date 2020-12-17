@@ -1,13 +1,12 @@
 //---------- import -----------
 const express = require("express");
-const bcrypt = require('bcrypt');
+const multer = require("multer");
+// const bcrypt = require('bcrypt');
 const app = express();
 const path = require("path");
-const multer = require("multer");
-
 const upload = require('./uploadConfig.js');
 
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 //---- mysql -----
 const mysql = require("mysql");
@@ -17,6 +16,10 @@ const { database, password } = require("./dbConfig.js");
 const con = mysql.createConnection(config);
 
 //middleware is .use
+app.use(express.static(path.join(__dirname, "js")))
+app.use(express.static(path.join(__dirname, "css")))
+app.use(express.static(path.join(__dirname, "img")))
+app.use(express.static(path.join(__dirname, "public")))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -42,6 +45,127 @@ app.get("/adminprofile", (req, res) => {
     res.sendFile(path.join(__dirname, "./profileAdmin.html"))
 });
 
+app.get("/explore", (req, res) => {
+    res.sendFile(path.join(__dirname, "./explore.html"))
+});
+
+app.get("/findgroup", (req, res) => {
+    res.sendFile(path.join(__dirname, "./Findsp.html"))
+});
+
+app.get("/contactus", (req, res) => {
+    res.sendFile(path.join(__dirname, "./contactus.html"))
+});
+
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "./login.html"))
+});
+
+app.get("/register", (req, res) => {
+    res.sendFile(path.join(__dirname, "./registerNew.html"))
+});
+
+app.get("/userindex", (req, res) => {
+    res.sendFile(path.join(__dirname, "./indexafterlogin.html"))
+});
+
+//login
+app.post("/userlogin", (req, res) => {
+    // console.log("test");
+    // const { username, password } = req.body;
+    const username = req.body.username;
+    const password = req.body.password;
+
+    if (username == 'Orawan021' && password == '6231302021') {
+        res.send("/admindashboard");
+        //console.log("Success")
+    }
+    else {
+        res.send("/userindex");
+    }
+
+    // const sql = `SELECT username, password FROM user WHERE username='${username}' AND password='${password}'`;
+
+    // con.query(sql, function (err, result) {
+    //     if (err) {
+    //         console.log(err);
+    //         res.status(500).send("Database server error");
+    //     } else {
+    //         if (username == 'Orawan021' && password == '6231302021') {
+    //            res.send("/admindashboard") ;
+    //            console.log("Success");
+    //         }
+    //         else {
+    //             res.send("/userindex");
+    //         }
+    //     }
+    // })
+
+    console.log(username, password);
+
+    // const sql = `SELECT username FROM user WHERE username='${username}' AND password='${password}'`;
+
+    //    console.log(sql);
+    // con.query(sql, function (err, result, field) {
+    //     if (err) {
+    //         console.log(err);
+    //         res.status(500).send("Database server error");
+    //     } else {
+    //         }
+    //     })
+});
+
+//---- register ----
+app.post("/registers", (req, res) => {
+    const username = req.body.username;
+    const first_name = req.body.first_name;
+    const last_name = req.body.last_name;
+    const email = req.body.email;
+    const gender = req.body.gender;
+    const passworduser = req.body.passworduser;
+
+    bcrypt.hash(password, 10, function (err, hash) {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Hash error");
+        } else {
+            //get hashed password
+            //insert to DB
+            console.log(hash)
+            const sql = 'INSERT INTO user (username, first_name, last_name, gender, password ,email) VALUE (?, ?, ?, ?, ?, ?)';
+
+            con.query(sql, [username, first_name, last_name, gender, hash, email], function (err, result) {
+
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Database server error.");
+                } else {
+                    if (result.affectedRows == 1) {
+                        res.send("New promotion has been added.");
+                    } else {
+                        res.status(501).send("Error while adding new user.");
+                    }
+                }
+            });
+        }
+    })
+
+});
+
+//---- get user ----
+app.get("/user", (req, res) => {
+    const sql = "SELECT username, first_name, last_name, email, gender, password FROM user";
+    con.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Database server error");
+        } else {
+            res.json(result);
+        }
+    });
+});
+
+
 
 //---Get the promotion
 app.get("/promotion", (req, res) => {
@@ -56,47 +180,49 @@ app.get("/promotion", (req, res) => {
     });
 });
 
-// ---- Upload file
-app.post("/uploading", function (req, res) {
-    upload(req, res, function (err) {
+
+//check row in table for display at dashboard
+app.get("/prolength", (req, res) => {
+    const sql = "SELECT COUNT(*) AS count FROM promotion";
+    con.query(sql, function (err, result) {
         if (err) {
             console.log(err);
-            res.status(500).send("Upload error");
+            res.status(500).send("Database server error");
         } else {
-            res.send("Upload done!");
+            // console.log(result);
+            res.json(result);
         }
-    })
+    });
+});
+
+app.get("/memberlength", (req, res) => {
+    const sql = "SELECT COUNT(*) AS count FROM user";
+    con.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Database server error");
+        } else {
+            // console.log(result);
+            res.json(result);
+        }
+    });
+});
+
+//Check current time
+app.get("/currentDate", function (req, res) {
+    const today = new Date().toLocaleDateString();
+    res.status(200).send(today);
 });
 
 //--- Add promotion -----
 app.post("/addpromotions", function (req, res) {
 
-    // let proImg = JSON.parse(req.headers.proImg);
-    // console.log(proImg);
-    // let imageName = Data.now() + "_" + proImg.originalname;
-
-    // const options = multer.diskStorage({
-
-    //     destination: function (req, file, cb) {
-    //         cb(null, "./imgupload/");
-    //     },
-    //     filename: function (req, file, cb) {
-    //         cb(null, imageName);
-    //     }
-
-    // });
-
-    // const upload = multer({ storage: options }).single("fileUpload");
-
-    // module.exports = upload;
-
-    // upload(req, res, function (err) {
-    //     if (err) {
-    //         console.log(err);
-    //         res.status(500).send("Upload error");
-    //     } else {
+    upload(req, res, function (err) {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Upload error");
+        } else {
             //upload data to database
-            const proCode = req.body.proCode;
             const proName = req.body.proName;
             const oriPrice = req.body.oriPrice;
             const salePrice = req.body.salePrice;
@@ -104,13 +230,12 @@ app.post("/addpromotions", function (req, res) {
             const endDate = req.body.endDate;
             const peoplePerPro = req.body.peoplePerPro;
             const proDetail = req.body.proDetail;
-            // const proImg = req.file.proImg;
+            const proImg = req.body.proImg;
 
-            console.log("New promotion: ", proCode, proName, oriPrice, salePrice, startDate, endDate, peoplePerPro, proDetail);
+            console.log("New promotion: ", proName, oriPrice, salePrice, startDate, endDate, peoplePerPro, proDetail, proImg);
 
-            const sql = 'INSERT INTO promotion (proCode, proName, peoplePerPro, oriPrice, salePrice, startDate, endDate, proDetail) VALUE (?, ?, ?, ?, ?, ?, ?, ?)';
-
-            con.query(sql, [proCode, proName, peoplePerPro, oriPrice, salePrice, startDate, endDate, proDetail], function (err, result) {
+            const sql = `INSERT INTO promotion (proName, peoplePerPro, oriPrice, salePrice, startDate, endDate, proDetail, proImg) VALUE (?, ?, ?, ?, ?, ?, ?, ?)`;
+            con.query(sql, [proName, peoplePerPro, oriPrice, salePrice, startDate, endDate, proDetail, proImg], function (err, result, fields) {
                 if (err) {
                     console.log(err);
                     res.status(500).send("Database server error.");
@@ -120,14 +245,11 @@ app.post("/addpromotions", function (req, res) {
                     } else {
                         res.status(501).send("Error while adding new user.");
                     }
-
-                    // res.send("New promotion has been added.");
-
                 }
             });
+        }
+    })
 
-    //     }
-    // });
 });
 
 //--start server--
