@@ -220,7 +220,7 @@ app.get("/currentDate", function (req, res) {
 
 //test
 app.get("/showImg", function (req, res) {
-    const sql = "SELECT proImg FROM promotion WHERE proCode = 17";
+    const sql = "SELECT proImg FROM promotion WHERE proCode = 19";
     con.query(sql, function (err, result) {
         if (err) {
             console.log(err);

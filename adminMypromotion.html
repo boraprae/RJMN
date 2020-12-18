@@ -69,6 +69,7 @@
         var promotionTable;
         var dataForm;
         var newPromotion;
+        var proImg;
 
         $(document).ready(function () {
 
@@ -88,9 +89,31 @@
                     { data: "endDate", title: "End date" },
                     { data: "peoplePerPro", title: "People per promotion" },
                     { data: "proDetail", title: "Detail" },
-                    { data: "proImg", title: "Image" },
+                    { data: "proImg", title: "Image", render: getImg },
                 ]
             });
+
+            //display img in column img
+            function getImg(data, type, full, meta) {
+
+                $.ajax({
+                    method: "GET",
+                    async: false,
+                    url: "/showImg",
+                    success: function (response) {
+                        proImg = response[0].proImg;
+                        //alert(proImg);
+                    },
+                    error: function (xhr, state) {
+                        console.log("Can not get the img");
+                    }
+                });
+                console.log(proImg);
+                
+                return '<img src="imgupload/' + proImg + '"height="150" width="150"' + '" />';
+            }
+
+            //add promotion
 
             $("#btnAddNewPro").click(function () {
                 $("#modalAddpro").modal("toggle");
@@ -328,7 +351,8 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
                                                     <input type="number" class="form-control form-control-user"
-                                                        id="txtpeoplePerPro" name="peoplePerPro" placeholder="People per Promotion">
+                                                        id="txtpeoplePerPro" name="peoplePerPro"
+                                                        placeholder="People per Promotion">
                                                 </div>
                                             </div>
 
@@ -359,7 +383,8 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">
                                                     <input type="text" class="form-control form-control-user"
-                                                        id="txtproDetail" name="proDetail" placeholder="Description" maxlength="200">
+                                                        id="txtproDetail" name="proDetail" placeholder="Description"
+                                                        maxlength="200">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
