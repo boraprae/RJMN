@@ -29,6 +29,10 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./index.html"))
 });
 
+app.get("/test", (req, res) => {
+    res.sendFile(path.join(__dirname, "./test9.html"))
+});
+
 app.get("/admindashboard", (req, res) => {
     res.sendFile(path.join(__dirname, "./adminDashboard.html"))
 });
@@ -214,6 +218,19 @@ app.get("/currentDate", function (req, res) {
     res.status(200).send(today);
 });
 
+//test
+app.get("/showImg", function (req, res) {
+    const sql = "SELECT proImg FROM promotion WHERE proCode = 17";
+    con.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Database server error");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 //--- Add promotion -----
 app.post("/addpromotions", function (req, res) {
 
@@ -230,7 +247,7 @@ app.post("/addpromotions", function (req, res) {
             const endDate = req.body.endDate;
             const peoplePerPro = req.body.peoplePerPro;
             const proDetail = req.body.proDetail;
-            const proImg = req.body.proImg;
+            const proImg = req.file.filename;
 
             console.log("New promotion: ", proName, oriPrice, salePrice, startDate, endDate, peoplePerPro, proDetail, proImg);
 

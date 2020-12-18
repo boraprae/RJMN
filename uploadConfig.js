@@ -12,6 +12,6 @@ const options = multer.diskStorage({
     
 });
 
-const upload = multer({storage: options}).single("proImgFile");
+const upload = multer({storage: options}).single("proImg");
 
 module.exports = upload;
