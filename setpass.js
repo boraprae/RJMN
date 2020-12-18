@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 // ====== Page route ======
 // ====== Root service ======
-app.get("/" ,function(req,res){
+app.get("/Changepass" ,function(req,res){
     res.sendFile(path.join(__dirname, "./changepass.html"));
 });
 app.get("/MyPurchase" ,function(req,res){
@@ -52,6 +52,8 @@ app.post("/login",function(req,res){
         
     });
 });
+
+
 
 // ====== Starting server ======
 const port = 3000;
