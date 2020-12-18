@@ -70,6 +70,7 @@
         var dataForm;
         var newPromotion;
         var proImg;
+        var totalpro;
 
         $(document).ready(function () {
 
@@ -83,48 +84,35 @@
                 columns: [
                     { data: "proCode", title: "Code" },
                     { data: "proName", title: "Promotion Name" },
+                    { data: "proType", title: "Promotion Type" },
                     { data: "oriPrice", title: "Original Price" },
                     { data: "salePrice", title: "Sale Price" },
                     { data: "startDate", title: "Start Date" },
                     { data: "endDate", title: "End date" },
                     { data: "peoplePerPro", title: "People per promotion" },
                     { data: "proDetail", title: "Detail" },
-                    { data: "proImg", title: "Image", render: getImg },
+                    { data: "proLocation", title: "Shop address" },
+                    {
+                        data: "proImg", title: "Image", "render": function (proImg) {
+                            return '<img src="imgupload/' + proImg + '"height="150" width="150"' + '" />';
+                        }
+                    },
                 ]
             });
-
-            //display img in column img
-            function getImg(data, type, full, meta) {
-
-                $.ajax({
-                    method: "GET",
-                    async: false,
-                    url: "/showImg",
-                    success: function (response) {
-                        proImg = response[0].proImg;
-                        //alert(proImg);
-                    },
-                    error: function (xhr, state) {
-                        console.log("Can not get the img");
-                    }
-                });
-                console.log(proImg);
-                
-                return '<img src="imgupload/' + proImg + '"height="150" width="150"' + '" />';
-            }
 
             //add promotion
 
             $("#btnAddNewPro").click(function () {
                 $("#modalAddpro").modal("toggle");
-                $("#txtProName").val("");
-                $("#txtpeoplePerPro").val("");
-                $("#txtOriPrice").val("");
-                $("#txtSalePrice").val("");
-                $("#txtStartDate").val("");
-                $("#txtEndDate").val("");
-                $("#txtproDetail").val("");
-                $("#proImgFile").val("");
+                $("input[name='proName']").val("");
+                $("input[name='peoplePerPro'").val("");
+                $("input[name='oriPrice'").val("");
+                $("input[name='salePrice'").val("");
+                $("input[name='startDate'").val("");
+                $("input[name='endDate'").val("");
+                $("input[name='proDetail'").val("");
+                $("input[name='proImg'").val("");
+                $("input[name='proLocation'").val("");
             });
 
             $("#formAddPro").submit(function (e) {
@@ -349,21 +337,33 @@
                                             </div>
 
                                             <div class="form-group row">
+                                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                                    <div class="ml-3">Promotion Type</div>
+                                                    <select class="form-control text-center"
+                                                        style="font-size: 0.8rem; border-radius: 20rem; padding: 1.5rem 1 rem;"
+                                                        name="proType">
+                                                        <option value="K-POP">K-POP</option>
+                                                        <option value="Food">Food</option>
+                                                        <option value="Makeup and Skincare">Makeup and Skincare</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
                                                 <div class="col-sm-12">
                                                     <input type="number" class="form-control form-control-user"
-                                                        id="txtpeoplePerPro" name="peoplePerPro"
-                                                        placeholder="People per Promotion">
+                                                        name="peoplePerPro" placeholder="People per Promotion">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <input type="number" class="form-control form-control-user"
-                                                        id="txtOriPrice" name="oriPrice" placeholder="Original Price">
+                                                        name="oriPrice" placeholder="Original Price">
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <input type="number" class="form-control form-control-user"
-                                                        id="txtSalePrice" name="salePrice" placeholder="Sale Price">
+                                                        name="salePrice" placeholder="Sale Price">
                                                 </div>
                                             </div>
 
@@ -371,25 +371,32 @@
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <div class="ml-3">Start Date</div>
                                                     <input type="date" class="form-control form-control-user"
-                                                        id="txtStartDate" name="startDate" placeholder="Start Date">
+                                                        name="startDate" placeholder="Start Date">
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="ml-3">End Date</div>
                                                     <input type="date" class="form-control form-control-user"
-                                                        id="txtEndDate" name="endDate" placeholder="End Date">
+                                                        name="endDate" placeholder="End Date">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">
                                                     <input type="text" class="form-control form-control-user"
-                                                        id="txtproDetail" name="proDetail" placeholder="Description"
-                                                        maxlength="200">
+                                                        name="proDetail" placeholder="Description" maxlength="200">
                                                 </div>
                                             </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                                    <input type="text" class="form-control form-control-user"
+                                                        name="proLocation" placeholder="Location address" maxlength="200">
+                                                </div>
+                                            </div>
+
                                             <div class="form-group row">
                                                 <div class="ml-3">Promotion Photo</div>
-                                                <input type="file" id="proImgFile" name="proImg" class="mt-3 ml-3">
+                                                <input type="file" name="proImg" class="mt-3 ml-3">
                                             </div>
                                             <button type="submit" class="btn btn-success btn-user btn-block"
                                                 id="btnAddConfirm">Add</button>

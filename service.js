@@ -169,17 +169,28 @@ app.get("/user", (req, res) => {
     });
 });
 
-
-
 //---Get the promotion
 app.get("/promotion", (req, res) => {
-    const sql = "SELECT proCode, proName, peoplePerPro, oriPrice, salePrice, startDate, endDate, proDetail, proImg FROM promotion";
+    const sql = "SELECT proCode, proName, proType, peoplePerPro, oriPrice, salePrice, startDate, endDate, proDetail, proImg, proLocation FROM promotion";
     con.query(sql, function (err, result) {
         if (err) {
             console.log(err);
             res.status(500).send("Database server error");
         } else {
             res.json(result);
+        }
+    });
+});
+
+//test
+app.get("/showImg", function (req, res) {
+    const sql = "SELECT proImg FROM promotion";
+    con.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Database server error");
+        } else {
+            res.send(result);
         }
     });
 });
@@ -218,18 +229,6 @@ app.get("/currentDate", function (req, res) {
     res.status(200).send(today);
 });
 
-//test
-app.get("/showImg", function (req, res) {
-    const sql = "SELECT proImg FROM promotion WHERE proCode = 19";
-    con.query(sql, function (err, result) {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Database server error");
-        } else {
-            res.send(result);
-        }
-    });
-});
 
 //--- Add promotion -----
 app.post("/addpromotions", function (req, res) {
@@ -247,12 +246,14 @@ app.post("/addpromotions", function (req, res) {
             const endDate = req.body.endDate;
             const peoplePerPro = req.body.peoplePerPro;
             const proDetail = req.body.proDetail;
+            const proType = req.body.proType;
+            const proLocation = req.body.proLocation;
             const proImg = req.file.filename;
 
-            console.log("New promotion: ", proName, oriPrice, salePrice, startDate, endDate, peoplePerPro, proDetail, proImg);
+            console.log("New promotion: ", proName, proType, oriPrice, salePrice, startDate, endDate, peoplePerPro, proDetail, proImg, proLocation);
 
-            const sql = `INSERT INTO promotion (proName, peoplePerPro, oriPrice, salePrice, startDate, endDate, proDetail, proImg) VALUE (?, ?, ?, ?, ?, ?, ?, ?)`;
-            con.query(sql, [proName, peoplePerPro, oriPrice, salePrice, startDate, endDate, proDetail, proImg], function (err, result, fields) {
+            const sql = `INSERT INTO promotion (proName, proType, peoplePerPro, oriPrice, salePrice, startDate, endDate, proDetail, proImg, proLocation) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+            con.query(sql, [proName, proType, peoplePerPro, oriPrice, salePrice, startDate, endDate, proDetail, proImg, proLocation], function (err, result, fields) {
                 if (err) {
                     console.log(err);
                     res.status(500).send("Database server error.");
