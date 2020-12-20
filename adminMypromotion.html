@@ -73,6 +73,19 @@
         var totalpro;
 
         $(document).ready(function () {
+            
+            //get current Date
+            $.ajax({
+                method: "GET",
+                url: "/currentDate",
+                success: function (response) {
+                    $("#dateTell").html("Today: " + response);
+                    //alert(currentTime);
+                },
+                error: function (xhr, state) {
+                    console.log("Can not get the current time");
+                }
+            });
 
             //create data table
             promotionTable = $("#promotionTable").DataTable({
@@ -96,12 +109,11 @@
                         data: "proImg", title: "Image", "render": function (proImg) {
                             return '<img src="imgupload/' + proImg + '"height="150" width="150"' + '" />';
                         }
-                    },
+                    }, 
                 ]
             });
 
             //add promotion
-
             $("#btnAddNewPro").click(function () {
                 $("#modalAddpro").modal("toggle");
                 $("input[name='proName']").val("");
@@ -128,7 +140,15 @@
                     contentType: false,
                     processData: false,
                 }).done(function (data, state, xhr) {
-                    Swal.fire(`Add complete!`);
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "Add promotion successfully!!",
+                        text: "You can check the detail at the table",
+                        showCloseButton: true,
+                        cancelButton: "Close",
+
+                    })
                     $("#modalAddpro").modal("toggle");
 
                     promotionTable.ajax.reload();
@@ -292,6 +312,9 @@
                         <h1 class="h3 mb-0 text-gray-800"><b>My Promotion</b> </h1>
                     </div>
 
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h5 class="h5 mb-0 text-gray-800" id="dateTell">Today: </h5>
+                    </div>
                     <button class="btn btn-primary" id="btnAddNewPro">Add
                         new promotion</button>
 
@@ -332,7 +355,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">
                                                     <input type="text" class="form-control form-control-user"
-                                                        id="txtProName" name="proName" placeholder="Promotion Name">
+                                                        id="txtProName" name="proName" placeholder="Promotion Name"  maxlength="40">
                                                 </div>
                                             </div>
 
@@ -352,7 +375,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
                                                     <input type="number" class="form-control form-control-user"
-                                                        name="peoplePerPro" placeholder="People per Promotion">
+                                                        name="peoplePerPro" placeholder="People per Promotion"  maxlength="5">
                                                 </div>
                                             </div>
 
@@ -390,7 +413,8 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">
                                                     <input type="text" class="form-control form-control-user"
-                                                        name="proLocation" placeholder="Location address" maxlength="200">
+                                                        name="proLocation" placeholder="Location address"
+                                                        maxlength="200">
                                                 </div>
                                             </div>
 

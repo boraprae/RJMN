@@ -69,6 +69,23 @@
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
+    <script>
+        $(document).ready(function () {
+            //get current Date
+            $.ajax({
+                method: "GET",
+                url: "/currentDate",
+                success: function (response) {
+                    $("#dateTell").html("Today: " + response);
+                    //alert(currentTime);
+                },
+                error: function (xhr, state) {
+                    console.log("Can not get the current time");
+                }
+            });
+        });
+    </script>
+
 </head>
 
 <body id="page-top">
@@ -211,13 +228,16 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"><b>Business Insight</b></h1>
                     </div>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h5 class="h5 mb-0 text-gray-800" id="dateTell">Today: </h5>
+                    </div>
 
                     <!-- Content Row -->
 
                     <div class="row">
-                        
+
                         <!-- Total income of RJMN -->
-                         <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -253,7 +273,7 @@
                                 </div>
                             </div>
                         </div>
-                    
+
 
 
 

@@ -76,8 +76,7 @@
 
     <script>
 
-        var data = [];
-        var currentTime;
+        var data;
         $(document).ready(function () {
 
             //check status promotion
@@ -85,7 +84,7 @@
                     method: "GET",
                     url: "/currentDate",
                     success: function (response) {
-                        currentTime = response;
+                        $("#dateTell").html("Today: "+response);
                         //alert(currentTime);
                     },
                     error: function (xhr, state) {
@@ -256,6 +255,9 @@
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"><b>Dashboard</b></h1>
+                    </div>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h5 class="h5 mb-0 text-gray-800" id="dateTell">Today: </h5>
                     </div>
 
                     <!-- Content Row -->
