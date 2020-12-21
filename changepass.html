@@ -387,15 +387,11 @@
         }
     </style>
     <script>
-
         $(document).ready(function () {
-            var passOne = $("#passOne").val();
-            var passTwo = $("#passTwo ").val();
-
-        
-
+            var newpass = $("#newpass").val();
+            var conpass = $("#conpass").val();
             var checkAndChange = function () {
-                if (passOne.length < 1) {
+                if (newpass.length < 1) {
                     if ($("#footer").hasClass("correct")) {
                         $("#footer").removeClass("correct").addClass("incorrect");
                         $("#footerText").html("Different");
@@ -404,7 +400,7 @@
                     }
                 }
                 else {
-                    if (passOne == passTwo) {
+                    if (newpass == conpass) {
                         $("#footer").removeClass("correct").addClass("incorrect");
                         $("#footerText").html("Continue");
                         $("#footerText").removeClass("glyphicon-remove");
@@ -419,19 +415,52 @@
                     }
                 }
             }
-
-
-
             $("input").keyup(function () {
-                var newPassOne = $("#passOne").val();
-                var newPassTwo = $("#passTwo").val();
+                var newPassOne = $("#newpass").val();
+                var newPassTwo = $("#conpass").val();
 
-                passOne = newPassOne;
-                passTwo = newPassTwo;
+                newpass = newPassOne;
+                conpass = newPassTwo;
 
                 checkAndChange();
             });
         });
+
+
+        $(document).ready(function () {
+            $("#savepass").click(function () {
+                const oldpass = $("#oldpass").val();
+                const newpass = $("#newpass").val();
+                const conpass = $("#conpass").val();
+                getNewpass();  
+                //verify
+                $.ajax({
+                    method: "POST",
+                    url: "/changepass",
+                    data: { oldpass: oldpass, newpass: newpass }
+                }).done(function (data, state, xhr) {
+                    alert("Complete !");
+                }).fail(function (xhr, state, error) {
+                    //wrong password
+                    $("#alertMessage").text(xhr.responseText);
+                    $(".alert-danger").show().fadeOut(3000);
+                });
+                if (newpass != conpass) {
+                    alert("Password Not Same")
+                } else if (newpass == "" || conpass == "") {
+                    alert("Fill Password")
+                } else {
+                    alert("Complete !")
+                }
+            });
+        });
+           
+  function getNewpass() {
+            //get data
+            const oldpass = $("#oldpass").val("");
+            const passone = $("#newpass").val("");
+            const passtwo = $("#conpass").val("");
+        }
     </script>
 </head>
 
@@ -486,20 +515,21 @@
                         <div class="col-12 ">
                             <label class="text-dark">Current Password</label>
                             <div class="form-group pass_show">
-                                <input type="password" class="form-control" placeholder="Current Password">
+                                <input type="password" class="form-control" placeholder="Current Password" id="oldpass">
                             </div>
                             <label class="text-dark">New Password</label>
                             <div class="form-group pass_show">
-                                <input type="password" class="form-control" placeholder="New Password" id="passOne">
+                                <input type="password" class="form-control" placeholder="New Password" id="newpass">
                             </div>
                             <label class="text-dark">Confirm Password</label>
                             <div class="form-group pass_show">
                                 <input type="password" class="form-control" placeholder="Confirm Password"
-                                    id="passTwo"><br>
-                                <div id="footerText" class="glyphicon glyphicon-remove" style="color:#FF0004;">FillerText</div>
+                                    id="conpass"><br>
+                                <div id="footerText" class="glyphicon glyphicon-remove" style="color:#FF0004;">
+                                    FillerText</div>
                             </div>
                             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
-                            <button class="btn btn-primary "> Save</button>
+                            <button class="btn btn-primary " id="savepass"> Save</button>
 
                         </div>
                     </div>
