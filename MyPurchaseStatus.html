@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>RJMN</title>
+  <link rel="icon" href="https://www.flaticon.com/svg/static/icons/svg/1029/1029183.svg" type="image/x-icon">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+  <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      color: #000;
+      overflow-x: hidden;
+      height: 100%;
+      background-color: #ffffff;
+      background-repeat: no-repeat
+    }
+
+    .card {
+      z-index: 0;
+      background-color: #f5f4f4;
+      padding-bottom: 20px;
+      margin-top: 90px;
+      margin-bottom: 90px;
+      border-radius: 10px
+    }
+
+    .top {
+      padding-top: 40px;
+      padding-left: 13% !important;
+      padding-right: 13% !important
+    }
+
+    #progressbar {
+      margin-bottom: 30px;
+      overflow: hidden;
+      color: #f5f0f0;
+      padding-left: 0px;
+      padding-right: 20px;
+      margin-top: 30px
+    }
+
+    #progressbar li {
+      list-style-type: none;
+      font-size: 13px;
+      width: 20%;
+      float: left;
+      position: relative;
+      font-weight: 400
+    }
+
+    #progressbar .step0:before {
+      font-family: FontAwesome;
+      content: "\f10c";
+      color: #fff
+    }
+
+    #progressbar li:before {
+      width: 40px;
+      height: 40px;
+      line-height: 45px;
+      display: block;
+      font-size: 20px;
+      background: #cfcdcd;
+      border-radius: 50%;
+      margin: auto;
+      padding: 0px
+    }
+
+    #progressbar li:after {
+      content: '';
+      width: 100%;
+      height: 12px;
+      background: #cfcdcd;
+      position: absolute;
+      left: 0;
+      top: 16px;
+      z-index: -1
+    }
+
+    #progressbar li:last-child:after {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      position: absolute;
+      left: -50%
+    }
+
+    #progressbar li:nth-child(2):after,
+    #progressbar li:nth-child(3):after,
+    #progressbar li:nth-child(4):after {
+      left: -50%
+    }
+
+    #progressbar li:first-child:after {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      position: absolute;
+      left: 50%
+    }
+
+    #progressbar li:last-child:after {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px
+    }
+
+    #progressbar li:first-child:after {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px
+    }
+
+    #progressbar li.active:before,
+    #progressbar li.active:after {
+      background: #651FFF
+    }
+
+    #progressbar li.active:before {
+      font-family: FontAwesome;
+      content: "\f00c"
+    }
+
+    .icon {
+      width: 60px;
+      height: 60px;
+      margin-right: 10px
+    }
+
+    .icon-content {
+      padding-bottom: 20px
+    }
+
+    @media screen and (max-width: 992px) {
+      .icon-content {
+        width: 50%
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar" style="background-color: #2D82B5;">
+      <!-- Side bar color  -->
+      <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+        </button>
+      </div>
+      <div class="img bg-wrap text-center py-4" style="background-image: url(bg_1.jpg);">
+        <div class="user-logo">
+          <div class="img" style="background-image: url(logo.jpg);"></div>
+          <h3>Kim Jennie</h3>
+        </div>
+      </div>
+      <ul class="list-unstyled components mb-5">
+        <li>
+          <a href="/mypurchase"><span class="fa fa-user mr-3"></span> My Account</a>
+        
+        <li>
+          <a href="/changepass">Set Password</a>
+        </li>
+        </li>
+        <li class="active">
+          <a href="#"><span class="fa fa-shopping-cart mr-3"></span> My Purchase</a>
+        </li>
+        <li>
+          <a href="#"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+        </li>
+      </ul>
+
+    </nav>
+
+    <!-- Page Content  -->
+
+    <div class="container px-1 px-md-4 py-5 mx-auto">
+      <div class="card">
+        <div class="row d-flex justify-content-between px-3 top">
+          <div class="d-flex">
+            <h5>ORDER <span class="text-primary font-weight-bold">#6152</span></h5>
+          </div>
+          <div class="d-flex flex-column text-sm-right">
+            <p class="mb-0">Expected Arrival <span>09/12/20</span></p>
+            <p>Nike Flex Form TR Women's Sneaker <br> ULTRABOOST UNCAGED SHOES <span class="font-weight-bold">
+
+          </div>
+        </div> <!-- Add class 'active' to progress -->
+        <div class="row d-flex justify-content-center">
+          <div class="col-12">
+            <ul id="progressbar" class="text-center">
+              <li class="active step0"></li>
+              <li class="active step0"></li>
+              <li class="active step0"></li>
+              <li class="step0"></li>
+              <li class="step0"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row justify-content-between top">
+          <div class="row d-flex icon-content"> <img class="icon"
+              src="https://img.icons8.com/dotty/80/000000/add-user-group-woman-woman.png" />
+            <div class="d-flex flex-column">
+              <p class="font-weight-bold">Join<br>Group</p>
+            </div>
+          </div>
+          <div class="row d-flex icon-content"> <img class="icon"
+              src="https://img.icons8.com/dotty/80/000000/paid.png" />
+            <div class="d-flex flex-column">
+              <p class="font-weight-bold">Members<br>Paid</p>
+            </div>
+          </div>
+          <div class="row d-flex icon-content"> <img class="icon"
+              src="https://img.icons8.com/dotty/80/000000/purchase-order.png" />
+            <div class="d-flex flex-column">
+              <p class="font-weight-bold">Successful<br>Purchase</p>
+            </div>
+          </div>
+          <div class="row d-flex icon-content"> <img class="icon"
+              src="https://img.icons8.com/wired/64/000000/event-accepted.png" />
+            <div class="d-flex flex-column">
+              <p class="font-weight-bold">Checked and <br>accepted <br> the product</p>
+            </div>
+          </div>
+          <div class="row d-flex icon-content"> <img class="icon"
+              src="https://img.icons8.com/wired/64/000000/task-completed.png" />
+            <p class="font-weight-bold">The order is<br>complete</p>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="row d-flex justify-content-between px-3 top">
+          <div class="d-flex">
+            <h6><span class="text-primary font-weight-bold">TOTAL PRODUCT COST: </span> $71.97</h6>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-between px-3 top">
+          <div class="d-flex">
+            <h6><span class="text-primary font-weight-bold">SHIPPING: </span> $10</h6>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-between px-3 top">
+          <div class="d-flex">
+            <h6><span class="text-primary font-weight-bold">TOTAL PRICE: </span> $81.97 </h6>
+          </div>
+        </div>
+      </div>
+      <a href="/mypurchase"><button class="btn btn-primary  ">Back To Purchase</button></a>
+    </div>
+  </div>
+  </div>
+
+
+
+  </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
