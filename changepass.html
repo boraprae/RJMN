@@ -3,17 +3,18 @@
 
 <head>
     <title>RJMN</title>
-    
+
     <link rel="icon" href="https://www.flaticon.com/svg/static/icons/svg/1029/1029183.svg" type="image/x-icon">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
-    
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <style>
         body {
             color: #000;
@@ -385,6 +386,82 @@
             }
         }
     </style>
+    <script>
+        $(document).ready(function () {
+            var newpass = $("#newpass").val();
+            var conpass = $("#conpass").val();
+            var checkAndChange = function () {
+                if (newpass.length < 1) {
+                    if ($("#footer").hasClass("correct")) {
+                        $("#footer").removeClass("correct").addClass("incorrect");
+                        $("#footerText").html("Different");
+                    } else {
+                        $("#footerText").html("Different");
+                    }
+                }
+                else {
+                    if (newpass == conpass) {
+                        $("#footer").removeClass("correct").addClass("incorrect");
+                        $("#footerText").html("Continue");
+                        $("#footerText").removeClass("glyphicon-remove");
+                        $("#footerText").addClass("glyphicon-ok");
+                        $("#footerText").css("color", "#00A41E");
+                    } else {
+                        $("#footer").removeClass("incorrect").addClass("correct");
+                        $("#footerText").html("Different");
+                        $("#footerText").removeClass("glyphicon-ok");
+                        $("#footerText").addClass("glyphicon-remove");
+                        $("#footerText").css("color", "#FF0004");
+                    }
+                }
+            }
+            $("input").keyup(function () {
+                var newPassOne = $("#newpass").val();
+                var newPassTwo = $("#conpass").val();
+
+                newpass = newPassOne;
+                conpass = newPassTwo;
+
+                checkAndChange();
+            });
+        });
+
+
+        $(document).ready(function () {
+            $("#savepass").click(function () {
+                const oldpass = $("#oldpass").val();
+                const newpass = $("#newpass").val();
+                const conpass = $("#conpass").val();
+                getNewpass();  
+                //verify
+                $.ajax({
+                    method: "POST",
+                    url: "/changepass",
+                    data: { oldpass: oldpass, newpass: newpass }
+                }).done(function (data, state, xhr) {
+                    alert("Complete !");
+                }).fail(function (xhr, state, error) {
+                    //wrong password
+                    $("#alertMessage").text(xhr.responseText);
+                    $(".alert-danger").show().fadeOut(3000);
+                });
+                if (newpass != conpass) {
+                    alert("Password Not Same")
+                } else if (newpass == "" || conpass == "") {
+                    alert("Fill Password")
+                } else {
+                    alert("Complete !")
+                }
+            });
+        });
+           
+  function getNewpass() {
+            //get data
+            const oldpass = $("#oldpass").val("");
+            const passone = $("#newpass").val("");
+            const passtwo = $("#conpass").val("");
+        }
+    </script>
 </head>
 
 <body>
@@ -404,10 +481,10 @@
             </div>
             <ul class="list-unstyled components mb-5">
                 <li>
-                    <a href="#"><span class="fa fa-user mr-3"></span> My Account</a>
+                    <a href="/mypurchase"><span class="fa fa-user mr-3"></span> My Account</a>
                 
                 <li class="active">
-                    <a href="#">Set Password</a>
+                    <a href="/changepass">Set Password</a>
                 </li>
                 </li>
                 <li>
@@ -424,6 +501,7 @@
 
         <div class="container px-1 px-md-4 py-5 mx-auto">
             <h2 class="col-md-4">Set Password</h2>
+            <div class="col-md-12"></div>
             <div class="card ">
                 <br>
                 <h3 class="text-center">Change Password</h3> <br>
@@ -435,18 +513,21 @@
                         <div class="col-12 ">
                             <label class="text-dark">Current Password</label>
                             <div class="form-group pass_show">
-                                <input type="" value="" class="form-control" placeholder="Current Password">
+                                <input type="password" class="form-control" placeholder="Current Password" id="oldpass">
                             </div>
                             <label class="text-dark">New Password</label>
                             <div class="form-group pass_show">
-                                <input type="" value="" class="form-control" placeholder="New Password">
+                                <input type="password" class="form-control" placeholder="New Password" id="newpass">
                             </div>
                             <label class="text-dark">Confirm Password</label>
                             <div class="form-group pass_show">
-                                <input type="" value="" class="form-control" placeholder="Confirm Password">
+                                <input type="password" class="form-control" placeholder="Confirm Password"
+                                    id="conpass"><br>
+                                <div id="footerText" class="glyphicon glyphicon-remove" style="color:#FF0004;">
+                                    FillerText</div>
                             </div>
-                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
-                            <button class="btn btn-primary "> Save</button>
+                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+                            <button class="btn btn-primary " id="savepass"> Save</button>
 
                         </div>
                     </div>
@@ -466,12 +547,12 @@
 
 
     </script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
     <script src="main.js"></script>
-    
+
 
 </body>
 
