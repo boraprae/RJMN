@@ -108,6 +108,23 @@ app.get("/user", (req, res) => {
     });
 });
  
+//=========== Set Password============
+app.post("/changepass", function (req, res) {
+
+    const oldpass = req.body.oldpass;
+    const newpass = req.body.newpass;
+
+    const sql = "UPDATE user SET password=? WHERE password=?";
+    con.query(sql, [ newpass,oldpass], function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.status(500).end("Server error");
+        }
+    });
+});
+
+
+
 // ============= Page routes ==============
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./index.html"))
@@ -160,6 +177,11 @@ app.get("/mypurchasestatus", (req, res) => {
 app.get("/mypurchase", (req, res) => {
     res.sendFile(path.join(__dirname, "./MyPurchase.html"))
 });
+
+app.get("/changepass", function (req, res) {
+    res.sendFile(path.join(__dirname, "./changepass.html"));
+});
+
  //====== Start Server ======
 
 const port = process.env.PORT || 3000;
