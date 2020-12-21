@@ -68,24 +68,6 @@
 
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-
-    <script>
-        $(document).ready(function () {
-            //get current Date
-            $.ajax({
-                method: "GET",
-                url: "/currentDate",
-                success: function (response) {
-                    $("#dateTell").html("Today: " + response);
-                    //alert(currentTime);
-                },
-                error: function (xhr, state) {
-                    console.log("Can not get the current time");
-                }
-            });
-        });
-    </script>
-
 </head>
 
 <body id="page-top">
@@ -138,7 +120,7 @@
             </div>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/adminstatic">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Business Insights</span></a>
@@ -195,7 +177,7 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="profileAdmin.html" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-fw fa-user mr-2"></i>
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="adminName">Admin</span>
@@ -224,132 +206,74 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Heading Page -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800"><b>Business Insight</b></h1>
-                    </div>
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h5 class="h5 mb-0 text-gray-800" id="dateTell">Today: </h5>
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4 ml-3">
+                        <h1 class="h3 mb-0 text-gray-800"><b>Admin Team</b></h1>
                     </div>
 
                     <!-- Content Row -->
-
                     <div class="row">
-
-                        <!-- Total income of RJMN -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Total income of RJMN</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalSystemIncome">
-                                                $215,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Total income of admin -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Total income of admin</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalAdminIncome">
-                                                $215,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Business Insight</h6>
-                                    <!-- <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div> -->
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Info -->
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
+                        <div class="col-md-6 mb-4">
+                            <!-- Card admin info -->
+                            <div class="card shadow mb-4 ">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Static Today</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">NO.1 ADMIN</h6>
                                 </div>
                                 <div class="card-body">
-                                    <h4 class="small font-weight-bold">Number of visitors <span
-                                            class="float-right">70%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 70%"
-                                            aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Number of order<span
-                                            class="float-right">40%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Successfully matching rate<span
-                                            class="float-right">60%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar" style="width: 60%"
-                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Successfully purchase rate<span
-                                            class="float-right">80%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    <p><b>Name: </b> Thiti Subsuksamran</p>
+                                    <p><b>Student Year: </b>2</p>
+                                    <p><b>Major: </b>Computer Science and Innovation</p>
+                                    <p><b>School of: </b>Information Technology</p>
+                                    <p><b>Contact: </b> 6231302007@lamduan.mfu.ac.th</p>
                                 </div>
                             </div>
+
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <!-- Card admin info -->
+                            <div class="card shadow mb-4 ">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">NO.1 ADMIN</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p><b>Name: </b> Orawan Khongthip</p>
+                                    <p><b>Student Year: </b>2</p>
+                                    <p><b>Major: </b>Computer Science and Innovation</p>
+                                    <p><b>School of: </b>Information Technology</p>
+                                    <p><b>Contact: </b> 6231302021@lamduan.mfu.ac.th</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <!-- Card admin info -->
+                            <div class="card shadow mb-4 ">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">NO.2 ADMIN</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p><b>Name: </b> Prinnada Comewinit</p>
+                                    <p><b>Student Year: </b>2</p>
+                                    <p><b>Major: </b>Computer Science and Innovation</p>
+                                    <p><b>School of: </b>Information Technology</p>
+                                    <p><b>Contact: </b> 6231302027@lamduan.mfu.ac.th</p>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
+                    <!-- /.container-fluid -->
 
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
+
+
 
             </div>
-            <!-- End of Main Content -->
+            <!-- End of Content Wrapper -->
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -365,39 +289,70 @@
                 </div>
             </footer>
             <!-- End of Footer -->
-
-
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/">Logout</a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="/">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
+        <!-- Bootstrap core JavaScript-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+            integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+            crossorigin="anonymous"></script>
+        <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+
+
+
+        <!-- Core plugin JavaScript-->
+        <!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+
+        <!-- Custom scripts for all pages-->
+        <!-- <script src="js/sb-admin-2.min.js"></script> -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/js/sb-admin-2.min.js"></script>
+
+
+        <!-- Page level plugins -->
+        <!-- <script src="vendor/datatables/jquery.dataTables.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net/1.10.22/jquery.dataTables.min.js"></script>
+        <!-- <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/1.10.22/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <!-- <script src="js/demo/datatables-demo.js"></script> -->
+        <!-- <script src="https://res.cloudinary.com/borahaewebpro/raw/upload/v1607198866/datatables-demo_cuzaqh.js"></script> -->
 
 </body>
 

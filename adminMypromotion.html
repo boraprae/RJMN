@@ -10,58 +10,189 @@
     <meta name="author" content="">
 
     <title>RJMN</title>
-    <link rel="icon" href="i/love.png" type="image/x-icon">
+    <link rel="icon" href="https://www.flaticon.com/svg/static/icons/svg/1029/1029183.svg" type="image/x-icon">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.2/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Custom fonts-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+
+    <!--Sweet alert-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.6.1/sweetalert2.min.css">
+
+    <!--JQ + Bootstrap CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+    <!--Chart CDN-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.3.2/bootbox.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+
+    <!--Sweet alert CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.6.1/sweetalert2.min.js"></script>
+
+    <!--Pagination CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css"
+        integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA=="
+        crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"
+        integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw=="
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
     <!-- Custom styles -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- <link href="css/sb-admin-2.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
 
     <script>
+        var promotionTable;
+        var dataForm;
+        var newPromotion;
+        var proImg;
+        var totalpro;
+
         $(document).ready(function () {
-
-            let dataSet = [
-                {
-                    "proName": "6231302001",
-                    "startDate": "Ethan Hunt",
-                    "endDate": "Male",
-                    "oriPrice": "CS",
-                    "salePrice": "IT",
-                    "peoplePerPro": "5",
-                    "proDetail": "อิ่มฟินแบบจุกๆกันไปเลย 1ฟรี1 อิ่ม อร่อยแบบจุกๆกันไปเลย คุ้มกว่านี้ไม่มีอีกแล้ว❗️",
-                    "proImg": "/img/cover4.jpg",
+            
+            //get current Date
+            $.ajax({
+                method: "GET",
+                url: "/currentDate",
+                success: function (response) {
+                    $("#dateTell").html("Today: " + response);
+                    //alert(currentTime);
+                },
+                error: function (xhr, state) {
+                    console.log("Can not get the current time");
                 }
-            ];
-            $("#btnAddNewPro").click(function () {
-                $("#modalAddpro").modal("toggle");
             });
-
-            $("#btnAddConfirm").click(function () {
-                $('#modalAddpro').modal('hide');
-            })
 
             //create data table
-            var table = $("#promotionTable").DataTable({
-                data: dataSet,
+            promotionTable = $("#promotionTable").DataTable({
+                ajax: {
+                    url: "/promotion",
+                    type: "GET",
+                    dataSrc: '',
+                },
                 columns: [
+                    { data: "proCode", title: "Code" },
                     { data: "proName", title: "Promotion Name" },
-                    { data: "startDate", title: "Start Date" },
-                    { data: "endDate", title: "End date" },
+                    { data: "proType", title: "Promotion Type" },
                     { data: "oriPrice", title: "Original Price" },
                     { data: "salePrice", title: "Sale Price" },
+                    { data: "startDate", title: "Start Date" },
+                    { data: "endDate", title: "End date" },
                     { data: "peoplePerPro", title: "People per promotion" },
                     { data: "proDetail", title: "Detail" },
-                    { data: "proImg", title: "Image" },
+                    { data: "proLocation", title: "Shop address" },
+                    {
+                        data: "proImg", title: "Image", "render": function (proImg) {
+                            return '<img src="imgupload/' + proImg + '"height="150" width="150"' + '" />';
+                        }
+                    }, 
                 ]
             });
+
+            //add promotion
+            $("#btnAddNewPro").click(function () {
+                $("#modalAddpro").modal("toggle");
+                $("input[name='proName']").val("");
+                $("input[name='peoplePerPro'").val("");
+                $("input[name='oriPrice'").val("");
+                $("input[name='salePrice'").val("");
+                $("input[name='startDate'").val("");
+                $("input[name='endDate'").val("");
+                $("input[name='proDetail'").val("");
+                $("input[name='proImg'").val("");
+                $("input[name='proLocation'").val("");
+            });
+
+            $("#formAddPro").submit(function (e) {
+                e.preventDefault();
+
+                const proInfo = new FormData(this);
+                console.log(proInfo);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/addpromotions",
+                    data: proInfo,
+                    contentType: false,
+                    processData: false,
+                }).done(function (data, state, xhr) {
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "Add promotion successfully!!",
+                        text: "You can check the detail at the table",
+                        showCloseButton: true,
+                        cancelButton: "Close",
+
+                    })
+                    $("#modalAddpro").modal("toggle");
+
+                    promotionTable.ajax.reload();
+
+                }).fail(function (xhr, state) {
+                    Swal.fire(xhr.responseText);
+                });
+
+            })
+
+            //Add data to table
+            // $("#btnAddConfirm").click(function () {
+            //     newPromotion = addPromotionInfo();
+
+            //     // console.log(newPromotion);
+            //     // alert(newPromotion)
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "/addpromotions",
+            //         data: newPromotion,
+            //     }).done(function (data, state, xhr) {
+            //         Swal.fire(`Add "${newPromotion.proName}" complete!`);
+            //         $("#modalAddpro").modal("toggle");
+
+            //         promotionTable.ajax.reload();
+            //         // console.log(newPromotion);
+            //     }).fail(function (xhr, state) {
+            //         Swal.fire(xhr.responseText);
+            //     });
+            // });
+
         });
+
+        // function addPromotionInfo() {
+        //     const proName = $("#txtProName").val();
+        //     const peoplePerPro = $("#txtpeoplePerPro").val();
+        //     const oriPrice = $("#txtOriPrice").val();
+        //     const salePrice = $("#txtSalePrice").val();
+        //     const startDate = $("#txtStartDate").val();
+        //     const endDate = $("#txtEndDate").val();
+        //     const proDetail = $("#txtproDetail").val();
+        //     const proImg = $("#proImgFile").val();
+        //     return { "proName": proName, "peoplePerPro": peoplePerPro, "oriPrice": oriPrice, "salePrice": salePrice, "startDate": startDate, "endDate": endDate, "proDetail": proDetail, "proImg": proImg }
+        // }
     </script>
 
 </head>
@@ -75,9 +206,9 @@
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #52A6D8;">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admindashboard">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-cogs"></i>
+                    <i class="fas fa-heart"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">RJMN<sup> Admin </sup></div>
             </a>
@@ -87,7 +218,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="adminDashboard.html">
+                <a class="nav-link" href="/admindashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -102,23 +233,9 @@
 
             <!-- Promotion menu -->
             <li class="nav-item active">
-                <a class="nav-link" href="adminMyPromotion.html">
+                <a class="nav-link" href="/addpromotion">
                     <i class="fas fa-fw fa-list"></i>
                     <span>My promotion</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Finance
-            </div>
-
-            <li class="nav-item">
-                <a class="nav-link" href="adminIncome.html">
-                    <i class="fas fa-fw fa-calculator"></i>
-                    <span>My income</span></a>
             </li>
 
             <!-- Divider -->
@@ -131,7 +248,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="adminBusinessInsight.html">
+                <a class="nav-link" href="/adminstatic">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Business Insights</span></a>
             </li>
@@ -165,20 +282,18 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-fw fa-user mr-2"></i>
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="adminName">Orawan
-                                    Khongthip</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="adminName">Admin</span>
                             </a>
 
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/adminprofile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="index.html" data-toggle="modal"
-                                    data-target="#logoutModal">
+                                <a class="dropdown-item" href="/" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -197,7 +312,11 @@
                         <h1 class="h3 mb-0 text-gray-800"><b>My Promotion</b> </h1>
                     </div>
 
-                    <button class="btn btn-primary" id="btnAddNewPro">Add new promotion</button>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h5 class="h5 mb-0 text-gray-800" id="dateTell">Today: </h5>
+                    </div>
+                    <button class="btn btn-primary" id="btnAddNewPro">Add
+                        new promotion</button>
 
                     <!-- Promotion DataTales -->
                     <div class="card shadow mb-4 mt-4">
@@ -230,28 +349,44 @@
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Add New Promotion!</h1>
                                         </div>
-                                        <form class="user">
+
+                                        <!-- Form Add Promotion -->
+                                        <form class="user" id="formAddPro" method="POST" enctype="multipart/form-data">
                                             <div class="form-group row">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">
                                                     <input type="text" class="form-control form-control-user"
-                                                        id="txtProName" placeholder="Promotion Name">
+                                                        id="txtProName" name="proName" placeholder="Promotion Name"  maxlength="40">
                                                 </div>
                                             </div>
+
                                             <div class="form-group row">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">
-                                                    <input type="text" class="form-control form-control-user"
-                                                        id="txtpeoplePerPro" placeholder="People per Promotion">
+                                                    <div class="ml-3">Promotion Type</div>
+                                                    <select class="form-control text-center"
+                                                        style="font-size: 0.8rem; border-radius: 20rem; padding: 1.5rem 1 rem;"
+                                                        name="proType">
+                                                        <option value="K-POP">K-POP</option>
+                                                        <option value="Food">Food</option>
+                                                        <option value="Makeup and Skincare">Makeup and Skincare</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <input type="number" class="form-control form-control-user"
+                                                        name="peoplePerPro" placeholder="People per Promotion"  maxlength="5">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="password" class="form-control form-control-user"
-                                                        id="txtOriPrice" placeholder="Original Price">
+                                                    <input type="number" class="form-control form-control-user"
+                                                        name="oriPrice" placeholder="Original Price">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="password" class="form-control form-control-user"
-                                                        id="txtSalePrice" placeholder="Sale Price">
+                                                    <input type="number" class="form-control form-control-user"
+                                                        name="salePrice" placeholder="Sale Price">
                                                 </div>
                                             </div>
 
@@ -259,25 +394,39 @@
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <div class="ml-3">Start Date</div>
                                                     <input type="date" class="form-control form-control-user"
-                                                        id="txtStartDate" placeholder="Start Date">
+                                                        name="startDate" placeholder="Start Date">
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="ml-3">End Date</div>
                                                     <input type="date" class="form-control form-control-user"
-                                                        id="txtEndDate" placeholder="End Date">
+                                                        name="endDate" placeholder="End Date">
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row" style="height: 30%;">
+                                            <div class="form-group row">
                                                 <div class="col-sm-12 mb-3 mb-sm-0">
                                                     <input type="text" class="form-control form-control-user"
-                                                        id="txtDetail" placeholder="Description">
+                                                        name="proDetail" placeholder="Description" maxlength="200">
                                                 </div>
                                             </div>
 
-                                            <a class="btn btn-success btn-user btn-block" id="btnAddConfirm">
+                                            <div class="form-group row">
+                                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                                    <input type="text" class="form-control form-control-user"
+                                                        name="proLocation" placeholder="Location address"
+                                                        maxlength="200">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="ml-3">Promotion Photo</div>
+                                                <input type="file" name="proImg" class="mt-3 ml-3">
+                                            </div>
+                                            <button type="submit" class="btn btn-success btn-user btn-block"
+                                                id="btnAddConfirm">Add</button>
+                                            <!-- <a class="btn btn-success btn-user btn-block" id="btnAddConfirm">
                                                 Add
-                                            </a>
+                                            </a> -->
                                             <hr>
                                         </form>
                                     </div>
@@ -286,12 +435,13 @@
 
                         </div>
                     </div>
+
                 </div>
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- /.container-fluid -->
-
             <!-- End of Main Content -->
+
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -307,7 +457,6 @@
                 </div>
             </footer>
             <!-- End of Footer -->
-
 
         </div>
         <!-- End of Content Wrapper -->
@@ -334,28 +483,11 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/">Logout</a>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 

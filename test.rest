@@ -1,0 +1,13 @@
+### Check login
+POST http://localhost:5000/login
+content-type: application/json
+ 
+{
+    "username": "admin",
+    "password": "1111"
+}
+
+###
+GET http://localhost:3000/promotion
+###
+DELETE http://localhost:5000/user/2
