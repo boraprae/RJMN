@@ -7,7 +7,8 @@
     <link rel="icon" href="https://www.flaticon.com/svg/static/icons/svg/1029/1029183.svg" type="image/x-icon">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -432,7 +433,7 @@
                 const oldpass = $("#oldpass").val();
                 const newpass = $("#newpass").val();
                 const conpass = $("#conpass").val();
-                getNewpass();  
+                getNewpass();
                 //verify
                 $.ajax({
                     method: "POST",
@@ -454,8 +455,8 @@
                 }
             });
         });
-           
-  function getNewpass() {
+
+        function getNewpass() {
             //get data
             const oldpass = $("#oldpass").val("");
             const passone = $("#newpass").val("");
@@ -482,7 +483,7 @@
             <ul class="list-unstyled components mb-5">
                 <li>
                     <a href="/mypurchase"><span class="fa fa-user mr-3"></span> My Account</a>
-                
+
                 <li class="active">
                     <a href="/changepass">Set Password</a>
                 </li>
@@ -491,7 +492,7 @@
                     <a href="/mypurchase"><span class="fa fa-shopping-cart mr-3"></span> My Purchase</a>
                 </li>
                 <li>
-                    <a href="#"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+                    <a href="/"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
                 </li>
             </ul>
 
@@ -538,15 +539,6 @@
         </div>
 
     </div>
-
-
-
-    </div>
-    </div>
-    <script>
-
-
-    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
