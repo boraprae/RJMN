@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, "js")))
 app.use(express.static(path.join(__dirname, "css")))
 app.use(express.static(path.join(__dirname, "images")))
 app.use(express.static(path.join(__dirname, "img")))
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //or
@@ -181,6 +182,11 @@ app.get("/mypurchase", (req, res) => {
 app.get("/changepass", function (req, res) {
     res.sendFile(path.join(__dirname, "./changepass.html"));
 });
+
+app.get("/myaccount", function (req, res) {
+    res.sendFile(path.join(__dirname, "./myaccount.html"));
+});
+
 
  //====== Start Server ======
 
