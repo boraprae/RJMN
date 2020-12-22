@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>RJMN</title>
+    <link rel="icon" href="https://www.flaticon.com/svg/static/icons/svg/1029/1029183.svg" type="image/x-icon">
+
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+    <!-- Bootstrap4 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.10.1/sweetalert2.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.10.1/sweetalert2.min.js"></script>
+
+    <!-- Pagination -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap 4.5.2 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Slick 1.8.1 jQuery plugin CSS (Sliders) -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <!-- Fancybox 3 jQuery plugin CSS (Open images and video in popup) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <!-- AOS 2.3.4 jQuery plugin CSS (Animations) -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- Startup CSS (Styles for all blocks) - Remove ".min" if you would edit a css code -->
+    <link href="style.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap 4.5.2 JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Fancybox 3 jQuery plugin JS (Open images and video in popup) -->
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <!-- Slick 1.8.1 jQuery plugin JS (Sliders) -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <!-- AOS 2.3.4 jQuery plugin JS (Animations) -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <!-- Maskedinput jQuery plugin JS (Masks for input fields) -->
+    <script src="jquery.maskedinput.min.js"></script>
+    <!-- Startup JS (Custom js for all blocks) -->
+    <script src="script.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.css">
+
+    <script>
+        $(document).ready(function () {
+            $("#btnLogin").click(function (e) {
+                const username = $('#txtUsername').val();
+                const password = $('#txtPassword').val();
+                $.ajax({
+                    method: "POST",
+                    url: "/logins",
+                    data: { "username": username, "password": password },
+                    success: function (response) {
+
+                    }
+                }).done(function (data, state, xhr) {
+                    window.location.replace(data);
+                }).fail(function (xhr, state) {
+                    //alert('Login failed');
+                    Swal.fire({
+                        icon: "error",
+                        title: "Please try again",
+                        text: "The username or password is incorrect!",
+                        showCloseButton: true,
+                        cancelButton: "Close",
+
+                    })
+                });
+            });
+
+            if (localStorage.chkbx && localStorage.chkbx != '') {
+                $('#customCheck').attr('checked', 'checked');
+                $('#txtUsername').val(localStorage.usrname);
+                $('#txtPassword').val(localStorage.pass);
+            } else {
+                $('#customCheck').removeAttr('checked');
+                $('#txtUsername').val('');
+                $('#txtPassword').val('');
+            }
+
+            $('#customCheck').click(function () {
+
+                if ($('#customCheck').is(':checked')) {
+                    // save username and password
+                    localStorage.usrname = $('#txtUsername').val();
+                    localStorage.pass = $('#txtPassword').val();
+                    localStorage.chkbx = $('#customCheck').val();
+                } else {
+                    localStorage.usrname = '';
+                    localStorage.pass = '';
+                    localStorage.chkbx = '';
+                }
+            });
+
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Navigation 1 -->
+    <nav class="pt-30 pb-30 bg-light text-center navigation_1 sticky-top">
+        <div class="container px-xl-0">
+            <div class="row justify-content-center align-items-center f-16">
+                <div class="mb-20 mb-lg-0 col-lg-3 text-lg-left" data-aos="fade-down" data-aos-delay="250">
+                    <a href="/" class="link color-main f-24 bold">
+                        RJMN
+                    </a>
+                </div>
+                <div class="col-lg-6" data-aos="fade-down" data-aos-delay="0">
+                    <a href="/" class="link mx-15 color-main">
+                        Home
+                    </a>
+                    <a href="/explore" class="link mx-15 color-main">
+                        Explore
+                    </a>
+                    <a href="/findgroup" class="link mx-15 color-main">
+                        Find group
+                    </a>
+                    <a href="/contactus" class="link mx-15 color-main">
+                        Contact us
+                    </a>
+                </div>
+                <div class="mt-20 mt-lg-0 col-lg-3 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center"
+                    data-aos="fade-down" data-aos-delay="250">
+                    <a href="/login" class="link mr-20 color-main">
+                        Login
+                    </a>
+                    <a href="/register" class="btn mr-20 sm action-2 f-16">
+                        Register
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    </div>
+                                    <form class="user">
+                                        <div class="form-group">
+                                            <input type="test" class="form-control form-control-user" id="txtUsername"
+                                                aria-describedby="emailHelp" placeholder="Enter Username" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                id="txtPassword" placeholder="Password" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label for="customCheck">
+                                                    Remember Me
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <a class="btn btn-user btn-block"
+                                            style="background-color: #52A6D8; color: white;" id="btnLogin">
+                                            Login
+                                        </a>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="btn-block" href="/register" id="btnRegister"
+                                            style="color: #52A6D8;">Create an Account!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

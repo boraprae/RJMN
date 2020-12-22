@@ -29,10 +29,6 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./index.html"))
 });
 
-app.get("/test", (req, res) => {
-    res.sendFile(path.join(__dirname, "./test9.html"))
-});
-
 app.get("/admindashboard", (req, res) => {
     res.sendFile(path.join(__dirname, "./adminDashboard.html"))
 });
@@ -62,7 +58,7 @@ app.get("/contactus", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "./login.html"))
+    res.sendFile(path.join(__dirname, "./login1.html"))
 });
 
 app.get("/register", (req, res) => {
@@ -73,50 +69,61 @@ app.get("/userindex", (req, res) => {
     res.sendFile(path.join(__dirname, "./indexafterlogin.html"))
 });
 
+app.get("/mypurchasestatus", (req, res) => {
+    res.sendFile(path.join(__dirname, "./MyPurchaseStatus.html"))
+});
+
+app.get("/mypurchase", (req, res) => {
+    res.sendFile(path.join(__dirname, "./MyPurchase.html"))
+});
+
+app.get("/changepass", function (req, res) {
+    res.sendFile(path.join(__dirname, "./changepass.html"));
+});
+
 //login
-app.post("/userlogin", (req, res) => {
+app.post("/logins", (req, res) => {
     // console.log("test");
     // const { username, password } = req.body;
+    // const username = req.body.username;
+    // const password = req.body.password;
+
+    // if (username == 'Orawan021' && password == '6231302021') {
+    //     res.send("/admindashboard");
+    //     //console.log("Success")
+    // }
+    // else {
+    //     res.send("/userindex");
+    // }
     const username = req.body.username;
     const password = req.body.password;
+    const sql = "SELECT username FROM user WHERE USERNAME=? AND PASSWORD=?";
 
-    if (username == 'Orawan021' && password == '6231302021') {
-        res.send("/admindashboard");
-        //console.log("Success")
-    }
-    else {
-        res.send("/userindex");
-    }
+    con.query(sql, [username, password], function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.status(500).end("Server error");
+            return;
+        }
 
-    // const sql = `SELECT username, password FROM user WHERE username='${username}' AND password='${password}'`;
-
-    // con.query(sql, function (err, result) {
-    //     if (err) {
-    //         console.log(err);
-    //         res.status(500).send("Database server error");
-    //     } else {
-    //         if (username == 'Orawan021' && password == '6231302021') {
-    //            res.send("/admindashboard") ;
-    //            console.log("Success");
-    //         }
-    //         else {
-    //             res.send("/userindex");
-    //         }
-    //     }
-    // })
+        // result is an array of records from database
+        const numrows = result.length;
+        //if no data
+        if (numrows != 1) {
+            res.status(401).end("Wrong username or password");
+        }
+        else {
+            if (result[0].username == 'Orawan021') {
+                res.send("/admindashboard");
+                console.log("Success")
+            }
+            else {
+                res.send("/");
+            }
+        }
+    });
 
     console.log(username, password);
-
-    // const sql = `SELECT username FROM user WHERE username='${username}' AND password='${password}'`;
-
-    //    console.log(sql);
-    // con.query(sql, function (err, result, field) {
-    //     if (err) {
-    //         console.log(err);
-    //         res.status(500).send("Database server error");
-    //     } else {
-    //         }
-    //     })
 });
 
 //---- register ----
@@ -156,8 +163,36 @@ app.post("/registers", (req, res) => {
 
 });
 
-//---- get user ----
+//---- get owner (Parn part)----
 app.get("/user", (req, res) => {
+    const sql = "SELECT username, password FROM user";
+    con.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Database server error");
+        } else {
+            res.json(result);
+        }
+    });
+});
+ 
+//=========== Set Password (Bo part)============
+app.post("/changepass", function (req, res) {
+
+    const oldpass = req.body.oldpass;
+    const newpass = req.body.newpass;
+
+    const sql = "UPDATE user SET password=? WHERE password=?";
+    con.query(sql, [ newpass,oldpass], function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.status(500).end("Server error");
+        }
+    });
+});
+
+//---- get user ----
+app.get("/getuserinfo", (req, res) => {
     const sql = "SELECT username, first_name, last_name, email, gender, password FROM user";
     con.query(sql, function (err, result) {
         if (err) {
