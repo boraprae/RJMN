@@ -57,35 +57,39 @@
     <script src="jquery.maskedinput.min.js"></script>
     <!-- Startup JS (Custom js for all blocks) -->
     <script src="script.js"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.3/css/sb-admin-2.css">
 
     <script>
         $(document).ready(function () {
             $("#btnLogin").click(function (e) {
                 const username = $('#txtUsername').val();
                 const password = $('#txtPassword').val();
+                localStorage.user = username;
+
                 $.ajax({
                     method: "POST",
                     url: "/logins",
                     data: { "username": username, "password": password },
                     success: function (response) {
-
+                        // alert(response);
+                        window.location.replace(response);
                     }
-                }).done(function (data, state, xhr) {
-                    window.location.replace(data);
                 }).fail(function (xhr, state) {
                     //alert('Login failed');
                     Swal.fire({
                         icon: "error",
                         title: "Please try again",
-                        text: "The username or password is incorrect!",
+                        text: xhr.responseText,
                         showCloseButton: true,
                         cancelButton: "Close",
 
                     })
                 });
             });
+
+            //localStorage from parn
 
             if (localStorage.chkbx && localStorage.chkbx != '') {
                 $('#customCheck').attr('checked', 'checked');
@@ -121,7 +125,7 @@
 <body>
 
     <!-- Navigation 1 -->
-    <nav class="pt-30 pb-30 bg-light text-center navigation_1 sticky-top">
+    <nav class="pt-30 pb-30 text-center navigation_1 sticky-top" style="background-color: white;">
         <div class="container px-xl-0">
             <div class="row justify-content-center align-items-center f-16">
                 <div class="mb-20 mb-lg-0 col-lg-3 text-lg-left" data-aos="fade-down" data-aos-delay="250">
@@ -167,7 +171,8 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block" style="background-image: url('/cat/cat1.jpg');"></div>
+                            <div class="col-lg-6 d-none d-lg-block" style="background-image: url('/cat/cat4.jpg');">
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -198,7 +203,7 @@
                                     <hr>
                                     <div class="text-center">
                                         <a class="btn-block" href="/register" id="btnRegister"
-                                            style="color: #52A6D8;">Create an Account!</a>
+                                            style="color: #52A6D8; font-size: small;">Don't have an account yet?</a>
                                     </div>
                                 </div>
                             </div>

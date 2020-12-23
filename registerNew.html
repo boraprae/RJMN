@@ -93,7 +93,7 @@
 <body>
 
     <!-- Navigation 1 -->
-    <nav class="pt-30 pb-30 bg-light text-center navigation_1 sticky-top">
+    <nav class="pt-30 pb-30 text-center navigation_1 sticky-top" style="background-color: white;">
         <div class="container px-xl-0">
             <div class="row justify-content-center align-items-center f-16">
                 <div class="mb-20 mb-lg-0 col-lg-3 text-lg-left" data-aos="fade-down" data-aos-delay="250">
@@ -134,7 +134,7 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block" style="background-image: url('/cat/cat2.jpg');">
+                    <div class="col-lg-5 d-none d-lg-block" style="background-image: url('/cat/cat3.jpg');">
                     </div>
                     <div class="col-lg-7">
                         <div class="p-5">
@@ -161,8 +161,13 @@
                                         placeholder="Username">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="txtGender"
-                                        placeholder="Gender">
+                                    <div class="ml-3">Select Gender</div>
+                                    <select class="form-control text-center"
+                                        style="font-size: 0.8rem; border-radius: 20rem; padding: 1.5rem 1 rem;"
+                                        id="txtGender">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">

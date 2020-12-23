@@ -1,11 +1,10 @@
-<div class="modal-body">
-					<img src="" style="width: 70%;" class="p-4" id="proImgCreate">
-					<p id="proNameCreate"><b>Room name:</b></p>
-					<p id="proTypeCreate"><b>Category:</b></p>
-					<p id="peoplePerproCreate"><b>Capacity:</b></p>
-					<p id="proLocationCreate"><b>Shop Location:</b></p>
-					<p id="proDetailCreate"><b>Promotion Detail:</b></p>
-					<p id="pricePerPerson"><b>Original Price per person:</b></p>
-					<p id="pricePerPerson"><b>Sale Price per person:</b></p>
-					<p id="totalPriceCreate"><b>Total Price of this group:</b></p>
-				</div>
+			$("#btnCreate1").click(function () {
+				Swal.fire({
+					icon: "warning",
+					title: "Sorry!",
+					text: "Please login first!",
+					showCloseButton: true,
+					cancelButton: "Close",
+
+				});
+			});

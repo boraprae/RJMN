@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>RJMN</title>
-    <link rel="icon" href="https://www.flaticon.com/svg/static/icons/svg/1029/1029183.svg" type="image/x-icon">
+	<link rel="icon" href="https://www.flaticon.com/svg/static/icons/svg/1029/1029183.svg" type="image/x-icon">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Jquery -->
@@ -46,6 +46,10 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 	<script>
+		var num;
+		var num2;
+		var num3;
+
 		$(document).ready(function () {
 
 			//get promotion data to new arrive card
@@ -92,122 +96,91 @@
 
 
 			$("#btnCreate1").click(function () {
-				$("#modalCreate").modal("show");
-				$.ajax({
-					method: "GET",
-					url: "/promotion",
-					success: function (response) {
-						let i = parseInt(response.length);
-
-						$("#proNameCreate").html("<b>Room name: </b>" + response[i - 1].proName);
-						$("#proImgCreate").attr("src", "imgupload/" + response[i - 1].proImg);
-						$("#proTypeCreate").html("<b>Category: </b>" + response[i - 1].proType);
-						$("#peoplePerproCreate").html("<b>Capacity: </b>" + response[i - 1].peoplePerPro);
-						$("#proLocationCreate").html("<b>Shop Location: </b>" + response[i - 1].proLocation);
-						$("#proDetailCreate").html("<b>Promotion Detail: </b>" + response[i - 1].proDetail);
-						$("#oriPricePerPerson").html("<b>Original Price per person: </b>" + response[i - 1].oriPrice);
-						$("#salePricePerPerson").html("<b>Sale Price per person: </b>" + response[i - 1].salePrice);
-						$("#totalPriceCreate").html("<b>Total Price of this group: </b>" + CalculatePrice(response[i - 1].salePrice, response[i - 1].peoplePerPro));
-					}
-				});
+				loginWarning();
 			});
 
 			$("#btnCreate2").click(function () {
-				$("#modalCreate").modal("show");
-				$.ajax({
-					method: "GET",
-					url: "/promotion",
-					success: function (response) {
-						let i = parseInt(response.length);
-
-						$("#proNameCreate").html("<b>Room name: </b>" + response[i - 2].proName);
-						$("#proImgCreate").attr("src", "imgupload/" + response[i - 2].proImg);
-						$("#proTypeCreate").html("<b>Category: </b>" + response[i - 2].proType);
-						$("#peoplePerproCreate").html("<b>Capacity: </b>" + response[i - 2].peoplePerPro);
-						$("#proLocationCreate").html("<b>Shop Location: </b>" + response[i - 2].proLocation);
-						$("#proDetailCreate").html("<b>Promotion Detail: </b>" + response[i - 2].proDetail);
-						$("#oriPricePerPerson").html("<b>Original Price per person: </b>" + response[i - 2].oriPrice);
-						$("#salePricePerPerson").html("<b>Sale Price per person: </b>" + response[i - 2].salePrice);
-						$("#totalPriceCreate").html("<b>Total Price of this group: </b>" + CalculatePrice(response[i - 2].salePrice, response[i - 2].peoplePerPro));
-					}
-				});
+				loginWarning();
 			});
 
 			$("#btnCreate3").click(function () {
-				$("#modalCreate").modal("show");
-				$.ajax({
-					method: "GET",
-					url: "/promotion",
-					success: function (response) {
-						let i = parseInt(response.length);
+				loginWarning();
+			});
 
-						$("#proNameCreate").html("<b>Room name: </b>" + response[i - 3].proName);
-						$("#proImgCreate").attr("src", "imgupload/" + response[i - 3].proImg);
-						$("#proTypeCreate").html("<b>Category: </b>" + response[i - 3].proType);
-						$("#peoplePerproCreate").html("<b>Capacity: </b>" + response[i - 3].peoplePerPro);
-						$("#proLocationCreate").html("<b>Shop Location: </b>" + response[i - 3].proLocation);
-						$("#proDetailCreate").html("<b>Promotion Detail: </b>" + response[i - 3].proDetail);
-						$("#oriPricePerPerson").html("<b>Original Price per person: </b>" + response[i - 3].oriPrice);
-						$("#salePricePerPerson").html("<b>Sale Price per person: </b>" + response[i - 3].salePrice);
-						$("#totalPriceCreate").html("<b>Total Price of this group: </b>" + CalculatePrice(response[i - 3].salePrice, response[i - 3].peoplePerPro));
+			//join mode
+			$.ajax({
+				method: "GET",
+				url: "/promotion",
+				success: function (response) {
+					let i = parseInt(response.length);
+					num = Math.floor(Math.random() * i);
+
+					//1st pro
+					$("#proNameRec1").html(response[num].proName);
+					$("#proImgRec1").attr("src", "imgupload/" + response[num].proImg);
+					$("#oriPriceRec1").html("฿" + response[num].oriPrice);
+					$("#salePriceRec1").html("฿" + response[num].salePrice);
+					$("#proTime1").html("Start: " + response[num].startDate + " - " + response[num].endDate)
+					$("#peoplePerProRec1").html("Need " + response[num].peoplePerPro + " people to join!");
+					$("#proDetailRec1").html(response[num].proDetail);
+
+					num2 = Math.floor(Math.random() * i);
+					if (num == num2) {
+						num2 = Math.floor(Math.random() * i);
 					}
-				});
+
+					//2nd pro
+					$("#proNameRec2").html(response[num2].proName);
+					$("#proImgRec2").attr("src", "imgupload/" + response[num2].proImg);
+					$("#oriPriceRec2").html("฿" + response[num2].oriPrice);
+					$("#salePriceRec2").html("฿" + response[num2].salePrice);
+					$("#proTime2").html("Start: " + response[num2].startDate + " - " + response[num].endDate)
+					$("#peoplePerProRec2").html("Need " + response[num2].peoplePerPro + " people to join!");
+					$("#proDetailRec2").html(response[num2].proDetail);
+
+
+					num3 = Math.floor(Math.random() * i);
+
+
+					//3th
+					$("#proNameRec3").html(response[num3].proName);
+					$("#proImgRec3").attr("src", "imgupload/" + response[num3].proImg);
+					$("#oriPriceRec3").html("฿" + response[num3].oriPrice);
+					$("#salePriceRec3").html("฿" + response[num3].salePrice);
+					$("#proTime3").html("Start: " + response[num3].startDate + " - " + response[num].endDate)
+					$("#peoplePerProRec3").html("Need " + response[num3].peoplePerPro + " people to join!");
+					$("#proDetailRec3").html(response[num3].proDetail);
+				}
 			});
 
-			function CalculatePrice(salePrice, people) {
-				let totalPrice = parseInt(salePrice) * parseInt(people);
-				return totalPrice;
-			}
-
-			$(".btnCreateCon").click(function () {
-				Swal.fire({
-					icon: "success",
-					title: "Create room successfully!",
-					text: "Please wait for another one joining",
-					showCloseButton: true,
-					confirmButtonText: "My crating room",
-					cancelButton: "Close",
-
-				}).then((result) => {
-					$("#modalCreate").modal("hide");
-
-					if (result.isConfirmed) {
-						// table.row(data).remove().draw(false);
-						Swal.fire(
-							'Please wait!',
-							'I did not create this page yet. (My crating room page)',
-							'warning'
-						)
-					}
-				});
+			$("#btnJoin1").click(function () {
+				loginWarning();
+			});
+			$("#btnJoin2").click(function () {
+				loginWarning();
 			});
 
-			$(".btnJoin").click(function () {
-				$("#modalJoin").modal("show");
+			$("#btnJoin3").click(function () {
+				loginWarning();
 			});
 
-			$(".btnJoinCon").click(function () {
-				Swal.fire({
-					icon: "success",
-					title: "Join room successfully!",
-					text: "Please wait for another one joining",
-					showCloseButton: true,
-					confirmButtonText: "My purchase",
-					cancelButton: "Close",
-
-				}).then((result) => {
-					$("#modalJoin").modal("hide");
-					if (result.isConfirmed) {
-						// table.row(data).remove().draw(false);
-						Swal.fire(
-							'Please wait!',
-							'I did not create this page yet.(Payment)',
-							'warning'
-						)
-					}
-				});
-			});
 		});
+
+		function loginWarning(){
+			Swal.fire({
+					icon: "warning",
+					title: "Sorry!",
+					text: "Please login first!",
+					showCloseButton: true,
+					cancelButton: "Close",
+
+				});
+		}
+
+		function CalculatePrice(salePrice, people) {
+			let totalPrice = parseInt(salePrice) * parseInt(people);
+			return totalPrice;
+		}
 	</script>
 
 </head>
@@ -257,12 +230,15 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<img src="promotion/pro2.jpg" style="width: 70%;" class="p-4">
-					<p id="roomName"><b>Room name:</b> Maisen</p>
-					<p id="capacityPro"><b>Capacity:</b> 1/2</p>
-					<p id="categoryPro"><b>Category:</b> Food</p>
-					<p id="totalpricePro"><b>Total Price:</b> 275 Baht</p>
-					<p id="pricepersonPro"><b>Price per person:</b> 188 Baht</p>
+					<img src="" style="width: 70%;" class="p-4" id="proImgJoin">
+					<p id="proNameJoin"><b>Room name:</b></p>
+					<p id="proTypeJoin"><b>Category:</b></p>
+					<p id="peoplePerprJoin"><b>Capacity:</b></p>
+					<p id="proLocationJoin"><b>Shop Location:</b></p>
+					<p id="proDetailJoin"><b>Promotion Detail:</b></p>
+					<p id="oriPricePerPersonJoin"><b>Original Price per person:</b></p>
+					<p id="salePricePerPersonJoin"><b>Sale Price per person:</b></p>
+					<p id="totalPriceJoin"><b>Total Price of this group:</b></p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn" style="background-color: #545b5f;"
@@ -427,79 +403,61 @@
 				<div class="row align-items-start no-gutters">
 					<div class="col-lg-4">
 						<div class="pt-45 radius10 noradius_right noborder_right block">
-							<div class="f-22 title" data-aos="fade-down" data-aos-delay="0">
-								มัทสึโมโตะลดกระหน่ำ!
-							</div>
-							<div class="mt-10 mb-35 color-heading subtitle" data-aos="fade-down" data-aos-delay="0">
-								สูงสุด 50% ยิ่งช้อปเยอะยิ่งลดเยอะ!!
+							<div class="f-22 title m-3" data-aos="fade-down" data-aos-delay="0" id="proNameRec1">
 							</div>
 							<div data-aos="fade-down" data-aos-delay="0">
 								<div class="d-inline-block f-58 relative price">
-									<img src="promotion/pro2.jpg" style="width: 100%;">
+									<img src="" style="width: 100%;" id="proImgRec1">
 								</div>
 							</div>
 							<div data-aos="fade-down" data-aos-delay="0">
-								<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ 16 พฤศจิกายน -
-									30 พฤศจิกายน 2563
-								</p>
-								<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-								<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-								<p id="promoDetail" class="my-3 text-left">Weekend shopping 🛒สวยกรุบที่
-									ร้านมัทสึโมโตะ คิโยชิ
-									🛍พบกับสินค้าลดราคาสูงสุด 50%‼️ ไอเทมเพื่อสุขภาพและความงามต่าง ๆ 👩‍🦰</p>
-								<a class="btn btnJoin m-3 action-1" href="#">Join</a>
+								<p class="text-left" style="font-size: 20px;color: red; text-decoration: line-through;"
+									id="oriPriceRec1">
+								<p class="text-left" style="font-size: 20px; font-weight: bold;" id="salePriceRec1"></p>
+								<p class="mt-2 text-left" style="color: red;" id="proTime1"></p>
+								<p class="text-left" style="font-weight: 20;" id="peoplePerProRec1"></p>
+								<p class="my-3 text-left" id="proDetailRec1"></p>
+								<a class="btn btnJoin m-3 action-1" id="btnJoin1">Join</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-4">
-						<div class="pt-45 noborder_right block">
-							<div class="f-22 title" data-aos="fade-down" data-aos-delay="0">
-								มัทสึโมโตะลดกระหน่ำ!
-							</div>
-							<div class="mt-10 mb-35 color-heading subtitle" data-aos="fade-down" data-aos-delay="0">
-								สูงสุด 50% ยิ่งช้อปเยอะยิ่งลดเยอะ!!
+						<div class="pt-45 radius10 noradius_right noborder_right block">
+							<div class="f-22 title m-3" data-aos="fade-down" data-aos-delay="0" id="proNameRec2">
 							</div>
 							<div data-aos="fade-down" data-aos-delay="0">
 								<div class="d-inline-block f-58 relative price">
-									<img src="promotion/pro2.jpg" style="width: 100%;">
+									<img src="" style="width: 100%;" id="proImgRec2">
 								</div>
 							</div>
 							<div data-aos="fade-down" data-aos-delay="0">
-								<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ 16 พฤศจิกายน -
-									30 พฤศจิกายน 2563
-								</p>
-								<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-								<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-								<p id="promoDetail" class="my-3 text-left">Weekend shopping 🛒สวยกรุบที่
-									ร้านมัทสึโมโตะ คิโยชิ
-									🛍พบกับสินค้าลดราคาสูงสุด 50%‼️ ไอเทมเพื่อสุขภาพและความงามต่าง ๆ 👩‍🦰</p>
-								<a class="btn btnJoin m-3 action-1" href="#">Join</a>
+								<p class="text-left" style="font-size: 20px;color: red; text-decoration: line-through;"
+									id="oriPriceRec2">
+								<p class="text-left" style="font-size: 20px; font-weight: bold;" id="salePriceRec2"></p>
+								<p class="mt-2 text-left" style="color: red;" id="proTime2"></p>
+								<p class="text-left" style="font-weight: 20;" id="peoplePerProRec2"></p>
+								<p class="my-3 text-left" id="proDetailRec2"></p>
+								<a class="btn btnJoin m-3 action-1" id="btnJoin2">Join</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-4">
-						<div class="pt-45 noborder_right block">
-							<div class="f-22 title" data-aos="fade-down" data-aos-delay="0">
-								มัทสึโมโตะลดกระหน่ำ!
-							</div>
-							<div class="mt-10 mb-35 color-heading subtitle" data-aos="fade-down" data-aos-delay="0">
-								สูงสุด 50% ยิ่งช้อปเยอะยิ่งลดเยอะ!!
+						<div class="pt-45 radius10 noradius_right noborder_right block">
+							<div class="f-22 title m-3" data-aos="fade-down" data-aos-delay="0" id="proNameRec3">
 							</div>
 							<div data-aos="fade-down" data-aos-delay="0">
 								<div class="d-inline-block f-58 relative price">
-									<img src="promotion/pro2.jpg" style="width: 100%;">
+									<img src="" style="width: 100%;" id="proImgRec3">
 								</div>
 							</div>
 							<div data-aos="fade-down" data-aos-delay="0">
-								<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ 16 พฤศจิกายน -
-									30 พฤศจิกายน 2563
-								</p>
-								<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-								<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-								<p id="promoDetail" class="my-3 text-left">Weekend shopping 🛒สวยกรุบที่
-									ร้านมัทสึโมโตะ คิโยชิ
-									🛍พบกับสินค้าลดราคาสูงสุด 50%‼️ ไอเทมเพื่อสุขภาพและความงามต่าง ๆ 👩‍🦰</p>
-								<a class="btn btnJoin m-3 action-1" href="#">Join</a>
+								<p class="text-left" style="font-size: 20px;color: red; text-decoration: line-through;"
+									id="oriPriceRec3">
+								<p class="text-left" style="font-size: 20px; font-weight: bold;" id="salePriceRec3"></p>
+								<p class="mt-2 text-left" style="color: red;" id="proTime3"></p>
+								<p class="text-left" style="font-weight: 20;" id="peoplePerProRec3"></p>
+								<p class="my-3 text-left" id="proDetailRec3"></p>
+								<a class="btn btnJoin m-3 action-1" id="btnJoin3">Join</a>
 							</div>
 						</div>
 					</div>

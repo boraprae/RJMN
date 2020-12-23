@@ -388,32 +388,6 @@
                 width: 70px;
             }
         }
-
-        /* Make more adjustments for phone */
-        @media screen and (max-width: 350px) {
-            .product-removal {
-                float: right;
-            }
-
-            .product-line-price {
-                float: right;
-                clear: left;
-                width: auto;
-                margin-top: 10px;
-            }
-
-            .product .product-line-price:before {
-                content: 'Item Total: $';
-            }
-
-            .totals .totals-item label {
-                width: 60%;
-            }
-
-            .totals .totals-item .totals-value {
-                width: 40%;
-            }
-        }
     </style>
 </head>
 
@@ -426,22 +400,25 @@
                 <button type="button" id="sidebarCollapse" class="btn btn-primary">
                 </button>
             </div>
-            <div class="img bg-wrap text-center py-4" style="background-image: url(bg_1.jpg);">
+            <div class="img bg-wrap text-center py-4" style="background-image: url('https://img.freepik.com/free-photo/filled-miniature-cart-with-paper-shopping-bags-front-pink-background_23-2147892202.jpg?size=626&ext=jpg&ga=GA1.2.1804624700.1602547200');">
                 <div class="user-logo">
-                    <div class="img" style="background-image: url(logo.jpg);"></div>
+                    <div class="img" style="background-image: url('https://www.shareicon.net/data/512x512/2017/01/06/868320_people_512x512.png');"></div>
                     <h3>Kim Jennie</h3>
                 </div>
             </div>
             <ul class="list-unstyled components mb-5">
                 <li>
-                    <a href="/mypurchase"><span class="fa fa-user mr-3"></span> My Account</a>
+                    <a href="/loginIndex"><span class="fa fa-home mr-3"></span>Back to home</a>
+                </li>
+                <li>
+                    <a href="/userAccount"><span class="fa fa-user mr-3"></span> My Account</a>
                 
                 <li>
                     <a href="/changepass">Set Password</a>
                 </li>
                 </li>
                 <li class="active">
-                    <a href="#"><span class="fa fa-shopping-cart mr-3"></span> My Purchase</a>
+                    <a href="/mypurchase"><span class="fa fa-shopping-cart mr-3"></span> My Purchase</a>
                 </li>
                 <li>
                     <a href="/"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>

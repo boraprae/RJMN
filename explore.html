@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>RJMN</title>
-    <link rel="icon" href="https://www.flaticon.com/svg/static/icons/svg/1029/1029183.svg" type="image/x-icon">
+	<link rel="icon" href="https://www.flaticon.com/svg/static/icons/svg/1029/1029183.svg" type="image/x-icon">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="i/love.png" type="image/x-icon">
 
@@ -48,92 +48,9 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
 
-	<script>
-		$(document).ready(function () {
-			$(".btnCreate").click(function(){
-				$("#modalCreate").modal("show");
-			});
-			$(".btnJoin").click(function(){
-				$("#modalJoin").modal("show");
-			});
-
-			$(".btnCreateCon").click(function(){
-				Swal.fire({
-                    icon: "success",
-                    title: "Create room successfully!",
-                    text: "Please wait for another one joining",
-                    showCloseButton: true,
-                    confirmButtonText: "My crating room",
-                    cancelButton: "Close",
-
-                }).then((result) => {
-					$("#modalCreate").modal("hide");
-                    if (result.isConfirmed) {
-                        // table.row(data).remove().draw(false);
-                        Swal.fire(
-                            'Please wait!',
-                            'I did not create this page yet. (My crating room page)',
-                            'warning'
-                        )	
-                    }
-                });
-			});
-			$(".btnJoinCon").click(function(){
-				Swal.fire({
-                    icon: "success",
-                    title: "Join room successfully!",
-                    text: "Please wait for another one joining",
-                    showCloseButton: true,
-                    confirmButtonText: "My purchase",
-                    cancelButton: "Close",
-
-                }).then((result) => {
-					$("#modalJoin").modal("hide");
-                    if (result.isConfirmed) {
-                        // table.row(data).remove().draw(false);
-                        Swal.fire(
-                            'Please wait!',
-                            'I did not create this page yet.(Payment)',
-                            'warning'
-                        )	
-                    }
-                });
-			});		
-		});
-	</script>
-
 </head>
 
 <body>
-
-	<!-- Modal Create Room-->
-    <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Joining room</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-					<img src="promotion/pro1.jpg" style="width: 70%;" class="p-4">
-					<p id="roomName"><b>Room name:</b>  Maisen</p>
-					<p id="capacityPro"><b>Capacity:</b>  1/2</p>
-					<p id="categoryPro"><b>Category:</b>  Food</p>
-					<p id="totalpricePro"><b>Total Price:</b> 275 Baht</p>
-					<p id="pricepersonPro"><b>Price per person:</b> 188 Baht</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" style="background-color: #545b5f;" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btnCreateCon action-1">Create</button>
-                </div>
-            </div>
-        </div>
-	</div>
-	
-	
 
 	<!-- Navigation 1 -->
 	<nav class="pt-30 pb-30 bg-light text-center navigation_1 sticky-top">
@@ -171,311 +88,231 @@
 		</div>
 	</nav>
 
-	<!-- Carousel -->
-	<div class="row my-5" data-aos="fade-down" data-aos-delay="100">
-		<div class="mx-auto col-8">
-			<div id="carousel" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"> </li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="1"> </li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="2"> </li>
-				</ol>
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img class="d-block img-fluid" src="cover11.webp">
+	<!-- title -->
+	<div class="container">
+		<div class="align-left">
+			<h2> Find Shopper </h2><br>
+		</div>
+		<!-- Find Group -->
+		<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal">
+			Find Group
+		</button> <br><br>
+
+		<!-- The Modal popup -->
+		<div class="modal" id="myModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title ">Find Group</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-					<div class="carousel-item">
-						<img class="d-block img-fluid" src="cover1.jpg">
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						Province ↓
+						<select class="form-control">
+							<option selected>Select</option>
+							<option>...</option>
+						</select>
+						District ↓
+						<select class="form-control">
+							<option selected>Select</option>
+							<option>...</option>
+						</select>
+						Subdistrict ↓
+						<select class="form-control">
+							<option selected>Select</option>
+							<option>...</option>
+						</select>
+						Promotion Category ↓
+						<select class="form-control">
+							<option selected>Select</option>
+							<option>...</option>
+						</select>
 					</div>
-					<div class="carousel-item">
-						<img class="img-fluid" src="cover3.jpg">
-						<!-- <div class="carousel-caption">
-                  <h5>Yellowstone National Park, United States</h5>
-                </div> -->
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-dark" data-dismiss="modal">Find Now</button>
 					</div>
 				</div>
-				<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-					<i class="now-ui-icons arrows-1_minimal-left x3"></i>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-					<i class="now-ui-icons arrows-1_minimal-right x3"></i>
-					<span class="sr-only">Next</span>
-				</a>
 			</div>
 		</div>
+
+		<div class="form-group col-md-4">
+			<label>
+				<h5> Promotion Category</h5>
+			</label>
+			<select class="form-control">
+				<option selected>Select</option>
+				<option>...</option>
+			</select>
+		</div>
+
 	</div>
 
-	<!-- Recommend Promotion To Create -->
-	<div class="py-5 " data-aos="fade-down" data-aos-delay="0"
-		style="background-image: linear-gradient(#88CDF6, #52A6D8)">
-		<div class="container" data-aos="fade-down" data-aos-delay="0">
-			<div class="row text-center">
-				<div class="col-md-12">
-					<div class="f-14 text-uppercase sp-20 text-light" style="font-size: 20px;" data-aos="fade-down"
-						data-aos-delay="0">
-						the promotion
+	<!-- Group-->
+	<div class="container">
+		<h3 class="h3">Perfume </h3>
+		<div class="row">
+			<div class="col-md-3 col-sm-6">
+				<div class="product-grid">
+					<div class="product-image">
+						<a href="#">
+							<img class="pic-1" src="ysl.jpg" width="200" height="200">
+						</a>
 					</div>
-					<h2 class="mt-15 text-uppercase mb-55 text-light" style="font-weight: bolder;" data-aos="fade-down"
-						data-aos-delay="250">
-						new arrival!
-					</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="text-center mx-auto col-md-12">
-					<ul class="pagination" data-aos="fade-down" data-aos-delay="300">
-						<li class="page-item"> <a class="page-link" href="#">Prev</a> </li>
-						<li class="page-item"> <a class="page-link" href="#">1</a> </li>
-						<li class="page-item"> <a class="page-link" href="#">2</a> </li>
-						<li class="page-item active"> <a class="page-link" href="#">3</a> </li>
-						<li class="page-item"> <a class="page-link" href="#">4</a> </li>
-						<li class="page-item"> <a class="page-link" href="#">Next</a> </li>
-					</ul>
+					<div class="product-content">
+						<h3 class="title"><a href="#">Women's Blouse</a></h3>
+
+						<a class="add-to-cart" href="">+ Join </a>
+					</div>
 				</div>
 			</div>
 
-			<!-- Promotion Card-->
-			<div class="row">
-				<div class="col-md-4 p-3">
-					<div class="card text-center text-dark" data-aos="fade-down" data-aos-delay="350">
-						<div class="card-body p-4">
-							<h4 id="promoName" class="p-4 semibold">Maisen</h4>
-							<div><img src="promotion/pro1.jpg" style="width: 100%;" id="promoPic"></div>
-							<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ตอนนี้ - 10 ธันวาคม 2563
-							</p>
-							<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-							<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-							<p id="promoDetail" class="my-3 text-left">อิ่มฟินแบบจุกๆกันไปเลย 1ฟรี1 อิ่ม อร่อย
-								แบบจุกๆกันไปเลย คุ้มกว่านี้ไม่มีอีกแล้ว❗️</p>
-							<a class="btn btnCreate mt-3 action-1" href="#">Join</a>
-						</div>
+
+			<div class="col-md-3 col-sm-6">
+				<div class="product-grid">
+					<div class="product-image">
+						<a href="#">
+							<img class="pic-1" src="chanel.jpg" width="200" height="200">
+						</a>
+					</div>
+					<div class="product-content">
+						<h3 class="title"><a href="#">Men's Plain Tshirt</a></h3>
+
+						<a class="add-to-cart" href="">+ Join </a>
 					</div>
 				</div>
-				<div class="col-md-4 p-3">
-					<div class="card text-center text-dark" data-aos="fade-down" data-aos-delay="400">
-						<div class="card-body p-4">
-							<h4 id="promoName" class="p-4 semibold">Maisen</h4>
-							<div><img src="promotion/pro1.jpg" style="width: 100%;" id="promoPic"></div>
-							<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ตอนนี้ - 10 ธันวาคม 2563
-							</p>
-							<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-							<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-							<p id="promoDetail" class="my-3 text-left">อิ่มฟินแบบจุกๆกันไปเลย 1ฟรี1 อิ่ม อร่อย
-								แบบจุกๆกันไปเลย คุ้มกว่านี้ไม่มีอีกแล้ว❗️</p>
-							<a class="btn btnCreate mt-3 action-1" href="#">Join</a>
-						</div>
+			</div>
+
+
+			<div class="col-md-3 col-sm-6">
+				<div class="product-grid">
+					<div class="product-image">
+						<a href="#">
+							<img class="pic-1 " src="ck.jpg " width="200" height="200">
+						</a>
+					</div>
+					<div class="product-content">
+						<h3 class="title"><a href="#">Men's Plain Tshirt</a></h3>
+						<a class="add-to-cart" href="">+ Join </a>
 					</div>
 				</div>
-				<div class="col-md-4 p-3">
-					<div class="card text-center text-dark" data-aos="fade-down" data-aos-delay="450">
-						<div class="card-body p-4">
-							<h4 id="promoName" class="p-4 semibold">Maisen</h4>
-							<div><img src="promotion/pro1.jpg" style="width: 100%;" id="promoPic"></div>
-							<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ตอนนี้ - 10 ธันวาคม 2563
-							</p>
-							<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-							<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-							<p id="promoDetail" class="my-3 text-left">อิ่มฟินแบบจุกๆกันไปเลย 1ฟรี1 อิ่ม อร่อย
-								แบบจุกๆกันไปเลย คุ้มกว่านี้ไม่มีอีกแล้ว❗️</p>
-							<a class="btn btnCreate mt-3 action-1" href="#">Join</a>
-						</div>
+			</div>
+
+
+			<div class="col-md-3 col-sm-6">
+				<div class="product-grid">
+					<div class="product-image">
+						<a href="#">
+							<img class="pic-1" src="dior.jpg" width="200" height="200">
+						</a>
+					</div>
+					<div class="product-content">
+						<h3 class="title"><a href="#">Men's Plain Tshirt</a></h3>
+						<a class="add-to-cart" href="">+ Join </a>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+		<br><br>
 
-	<!-- Pricing table 1 -->
-	<section class="pt-105 pb-100 bg-light text-center pricing_table_1">
-		<div class="container px-xl-0">
-			<h2 class="text-uppercase" style="font-weight: bolder;" data-aos="fade-down" data-aos-delay="0">
-				The promotion
-			</h2>
-			<div class="mt-15 mb-60 f-22 color-heading text-adaptive" data-aos="fade-down" data-aos-delay="250">
-				Start with free trial. Cancel at anytime. Let's join for exclusive promotion!
-			</div>
-			<div class="row align-items-start no-gutters">
-				<div class="col-lg-4">
-					<div class="pt-45 radius10 noradius_right noborder_right block">
-						<div class="f-22 title" data-aos="fade-down" data-aos-delay="0">
-							มัทสึโมโตะลดกระหน่ำ!
-						</div>
-						<div class="mt-10 mb-35 color-heading subtitle" data-aos="fade-down" data-aos-delay="0">
-							สูงสุด 50% ยิ่งช้อปเยอะยิ่งลดเยอะ!!
-						</div>
-						<div data-aos="fade-down" data-aos-delay="0">
-							<div class="d-inline-block f-58 relative price">
-								<img src="promotion/pro2.jpg" style="width: 100%;">
-							</div>
-						</div>
-						<div data-aos="fade-down" data-aos-delay="0">
-							<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ 16 พฤศจิกายน - 30 พฤศจิกายน 2563
-							</p>
-							<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-							<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-							<p id="promoDetail" class="my-3 text-left">Weekend shopping 🛒สวยกรุบที่ ร้านมัทสึโมโตะ คิโยชิ
-								🛍พบกับสินค้าลดราคาสูงสุด 50%‼️ ไอเทมเพื่อสุขภาพและความงามต่าง ๆ 👩‍🦰</p>
-								<a class="btn btnJoin m-3 action-1" href="#">Join</a>
-						</div>
+		<h3 class="h3">Lipstike </h3>
+		<div class="row">
+			<div class="col-md-3 col-sm-6">
+				<div class="product-grid">
+					<div class="product-image">
+						<a href="#">
+							<img class="pic-1" src="ysl.jpg" width="200" height="200">
+						</a>
 					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="pt-45 noborder_right block">
-						<div class="f-22 title" data-aos="fade-down" data-aos-delay="0">
-							มัทสึโมโตะลดกระหน่ำ!
-						</div>
-						<div class="mt-10 mb-35 color-heading subtitle" data-aos="fade-down" data-aos-delay="0">
-							สูงสุด 50% ยิ่งช้อปเยอะยิ่งลดเยอะ!!
-						</div>
-						<div data-aos="fade-down" data-aos-delay="0">
-							<div class="d-inline-block f-58 relative price">
-								<img src="promotion/pro2.jpg" style="width: 100%;">
-							</div>
-						</div>
-						<div data-aos="fade-down" data-aos-delay="0">
-							<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ 16 พฤศจิกายน - 30 พฤศจิกายน 2563
-							</p>
-							<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-							<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-							<p id="promoDetail" class="my-3 text-left">Weekend shopping 🛒สวยกรุบที่ ร้านมัทสึโมโตะ คิโยชิ
-								🛍พบกับสินค้าลดราคาสูงสุด 50%‼️ ไอเทมเพื่อสุขภาพและความงามต่าง ๆ 👩‍🦰</p>
-								<a class="btn btnJoin m-3 action-1" href="#">Join</a>
-						</div>
+					<div class="product-content">
+						<h3 class="title"><a href="#">Women's Blouse</a></h3>
+
+						<a class="add-to-cart" href="">+ Join </a>
 					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="pt-45 noborder_right block">
-						<div class="f-22 title" data-aos="fade-down" data-aos-delay="0">
-							มัทสึโมโตะลดกระหน่ำ!
-						</div>
-						<div class="mt-10 mb-35 color-heading subtitle" data-aos="fade-down" data-aos-delay="0">
-							สูงสุด 50% ยิ่งช้อปเยอะยิ่งลดเยอะ!!
-						</div>
-						<div data-aos="fade-down" data-aos-delay="0">
-							<div class="d-inline-block f-58 relative price">
-								<img src="promotion/pro2.jpg" style="width: 100%;">
-							</div>
-						</div>
-						<div data-aos="fade-down" data-aos-delay="0">
-							<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ 16 พฤศจิกายน - 30 พฤศจิกายน 2563
-							</p>
-							<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-							<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-							<p id="promoDetail" class="my-3 text-left">Weekend shopping 🛒สวยกรุบที่ ร้านมัทสึโมโตะ คิโยชิ
-								🛍พบกับสินค้าลดราคาสูงสุด 50%‼️ ไอเทมเพื่อสุขภาพและความงามต่าง ๆ 👩‍🦰</p>
-								<a class="btn btnJoin m-3 action-1" href="#">Join</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-    </section>
-    
-	<!-- Recommend Promotion To Create -->
-	<div class="py-5 " data-aos="fade-down" data-aos-delay="0"
-		style="background-image: linear-gradient(#88CDF6, #52A6D8)">
-		<div class="container" data-aos="fade-down" data-aos-delay="0">
-			<div class="row text-center">
-				<div class="col-md-12">
-					<div class="f-14 text-uppercase sp-20 text-light" style="font-size: 20px;" data-aos="fade-down"
-						data-aos-delay="0">
-						the promotion
-					</div>
-					<h2 class="mt-15 text-uppercase mb-55 text-light" style="font-weight: bolder;" data-aos="fade-down"
-						data-aos-delay="250">
-						new arrival!
-					</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="text-center mx-auto col-md-12">
-					<ul class="pagination" data-aos="fade-down" data-aos-delay="300">
-						<li class="page-item"> <a class="page-link" href="#">Prev</a> </li>
-						<li class="page-item"> <a class="page-link" href="#">1</a> </li>
-						<li class="page-item"> <a class="page-link" href="#">2</a> </li>
-						<li class="page-item active"> <a class="page-link" href="#">3</a> </li>
-						<li class="page-item"> <a class="page-link" href="#">4</a> </li>
-						<li class="page-item"> <a class="page-link" href="#">Next</a> </li>
-					</ul>
 				</div>
 			</div>
 
-			<!-- Promotion Card-->
-			<div class="row">
-				<div class="col-md-4 p-3">
-					<div class="card text-center text-dark" data-aos="fade-down" data-aos-delay="350">
-						<div class="card-body p-4">
-							<h4 id="promoName" class="p-4 semibold">Maisen</h4>
-							<div><img src="promotion/pro1.jpg" style="width: 100%;" id="promoPic"></div>
-							<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ตอนนี้ - 10 ธันวาคม 2563
-							</p>
-							<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-							<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-							<p id="promoDetail" class="my-3 text-left">อิ่มฟินแบบจุกๆกันไปเลย 1ฟรี1 อิ่ม อร่อย
-								แบบจุกๆกันไปเลย คุ้มกว่านี้ไม่มีอีกแล้ว❗️</p>
-							<a class="btn btnCreate mt-3 action-1" href="#">Join</a>
-						</div>
+
+			<div class="col-md-3 col-sm-6">
+				<div class="product-grid">
+					<div class="product-image">
+						<a href="#">
+							<img class="pic-1" src="chanellip.jpg" width="200" height="200">
+						</a>
+					</div>
+					<div class="product-content">
+						<h3 class="title"><a href="#">Men's Plain Tshirt</a></h3>
+
+						<a class="add-to-cart" href="">+ Join </a>
 					</div>
 				</div>
-				<div class="col-md-4 p-3">
-					<div class="card text-center text-dark" data-aos="fade-down" data-aos-delay="400">
-						<div class="card-body p-4">
-							<h4 id="promoName" class="p-4 semibold">Maisen</h4>
-							<div><img src="promotion/pro1.jpg" style="width: 100%;" id="promoPic"></div>
-							<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ตอนนี้ - 10 ธันวาคม 2563
-							</p>
-							<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-							<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-							<p id="promoDetail" class="my-3 text-left">อิ่มฟินแบบจุกๆกันไปเลย 1ฟรี1 อิ่ม อร่อย
-								แบบจุกๆกันไปเลย คุ้มกว่านี้ไม่มีอีกแล้ว❗️</p>
-							<a class="btn btnCreate mt-3 action-1" href="#">Join</a>
-						</div>
+			</div>
+
+
+			<div class="col-md-3 col-sm-6">
+				<div class="product-grid">
+					<div class="product-image">
+						<a href="#">
+							<img class="pic-1 " src="4u2.jpg " width="200" height="200">
+						</a>
+					</div>
+					<div class="product-content">
+						<h3 class="title"><a href="#">Men's Plain Tshirt</a></h3>
+						<a class="add-to-cart" href="">+ Join </a>
 					</div>
 				</div>
-				<div class="col-md-4 p-3">
-					<div class="card text-center text-dark" data-aos="fade-down" data-aos-delay="450">
-						<div class="card-body p-4">
-							<h4 id="promoName" class="p-4 semibold">Maisen</h4>
-							<div><img src="promotion/pro1.jpg" style="width: 100%;" id="promoPic"></div>
-							<p class="mt-2 text-left" style="color: red;" id="promoTime">ตั้งแต่ตอนนี้ - 10 ธันวาคม 2563
-							</p>
-							<p class="text-left" style="font-size: 20px; font-weight: bold;">ราคา 187 บาท</p>
-							<p class="text-left" style="font-weight: 20;">ต้องการคนแชร์ 2 คน</p>
-							<p id="promoDetail" class="my-3 text-left">อิ่มฟินแบบจุกๆกันไปเลย 1ฟรี1 อิ่ม อร่อย
-								แบบจุกๆกันไปเลย คุ้มกว่านี้ไม่มีอีกแล้ว❗️</p>
-							<a class="btn btnCreate mt-3 action-1" href="#">Join</a>
-						</div>
+			</div>
+
+
+			<div class="col-md-3 col-sm-6">
+				<div class="product-grid">
+					<div class="product-image">
+						<a href="#">
+							<img class="pic-1" src="diorlip.jpg" width="200" height="200">
+						</a>
+					</div>
+					<div class="product-content">
+						<h3 class="title"><a href="#">Men's Plain Tshirt</a></h3>
+						<a class="add-to-cart" href="">+ Join </a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!-- table promo -->
 
-    
+
+
+
 	<!-- Footer 2 -->
-	<footer class="pt-70 pb-65 text-center footer_2" style="background-color: #52A6D8;">
+	<footer class="pt-70 pb-65 bg-light text-center footer_2">
 		<div class="container px-xl-0">
 			<div class="row justify-content-center">
 				<div class="col-12 lh-40" data-aos="fade-down" data-aos-delay="0">
-					<a href="#" class="link mx-20 text-light">
+					<a href="#" class="link color-main mx-20">
 						Portfolio
 					</a>
-					<a href="#" class="link mx-20 text-light">
+					<a href="#" class="link color-main mx-20">
 						How it Works
 					</a>
-					<a href="#" class="link mx-20 text-light">
+					<a href="#" class="link color-main mx-20">
 						Pricing
 					</a>
-					<a href="#" class="link mx-20 text-light">
+					<a href="#" class="link color-main mx-20">
 						About
 					</a>
-					<a href="/contactus" class="link mx-20 text-light">
+					<a href="#" class="link color-main mx-20">
 						Contacts
 					</a>
 				</div>
 				<div class="mt-20 col-12" data-aos="fade-down" data-aos-delay="250">
-					<div class="text-adaptive text-light">
+					<div class="color-heading text-adaptive">
 						Be sure to take a look at our Terms of Use and Privacy Policy
 					</div>
 				</div>
