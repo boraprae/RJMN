@@ -44,6 +44,7 @@
     <link href="style.min.css" rel="stylesheet" />
     <!-- jQuery 3.5.1 -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="./login1.html">
 
     <script>
 
@@ -52,6 +53,9 @@
         var num3;
 
         $(document).ready(function () {
+            //alert(localStorage.user);
+            $("#userLog").html(localStorage.user)
+
             //get promotion data to new arrive card
             $.ajax({
                 method: "GET",

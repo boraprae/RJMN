@@ -66,7 +66,6 @@
             $("#btnLogin").click(function (e) {
                 const username = $('#txtUsername').val();
                 const password = $('#txtPassword').val();
-                localStorage.user = username;
 
                 $.ajax({
                     method: "POST",
@@ -74,6 +73,7 @@
                     data: { "username": username, "password": password },
                     success: function (response) {
                         // alert(response);
+                        localStorage.user = username;
                         window.location.replace(response);
                     }
                 }).fail(function (xhr, state) {

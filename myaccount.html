@@ -16,6 +16,7 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="./login1.html">
     <style>
         body {
             color: #000;
@@ -74,7 +75,7 @@
         }
 
         .p-b {
-           padding-bottom: 40px ;
+            padding-bottom: 40px;
         }
 
         .user-card-full .user-profile {
@@ -184,6 +185,26 @@
         }
     </style>
 
+    <script>
+        var userKey = localStorage.user;
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST",
+                url: "/getuserInfo",
+                data: {"userKey": userKey },
+                success: function (response) {
+                    console.log(response);
+                //    $("#userRealName").html(response[0].first_name);
+                }
+            }).fail(function (xhr, state) {
+                alert(xhr.responseText);
+            });
+
+           
+        });
+    </script>
+
 </head>
 
 <body>
@@ -195,10 +216,13 @@
                 <button type="button" id="sidebarCollapse" class="btn btn-primary">
                 </button>
             </div>
-            <div class="img bg-wrap text-center py-4" style="background-image: url('https://img.freepik.com/free-photo/filled-miniature-cart-with-paper-shopping-bags-front-pink-background_23-2147892202.jpg?size=626&ext=jpg&ga=GA1.2.1804624700.1602547200');">
+            <div class="img bg-wrap text-center py-4"
+                style="background-image: url('https://img.freepik.com/free-photo/filled-miniature-cart-with-paper-shopping-bags-front-pink-background_23-2147892202.jpg?size=626&ext=jpg&ga=GA1.2.1804624700.1602547200');">
                 <div class="user-logo">
-                    <div class="img" style="background-image: url('https://www.shareicon.net/data/512x512/2017/01/06/868320_people_512x512.png');"></div>
-                    <h3>Kim Jennie</h3>
+                    <div class="img"
+                        style="background-image: url('https://www.shareicon.net/data/512x512/2017/01/06/868320_people_512x512.png');">
+                    </div>
+                    <h3 id="userRealName">Kim Jennie</h3>
                 </div>
             </div>
             <ul class="list-unstyled components mb-5">
@@ -279,10 +303,6 @@
     </div>
     </div>
     </div>
-    <script>
-
-
-    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>

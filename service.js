@@ -120,7 +120,7 @@ app.post("/logins", (req, res) => {
                     } else {
                         if (same) {
                             // raw == hash
-                            if (result[0].username == 'Orawan021' || result[0].username == 'Prinnada027' || result[0].username == 'Thiti007') {
+                            if ((result[0].username == 'Orawan021') || (result[0].username == 'Prinnada027') || (result[0].username == 'Thiti007')) {
                                 res.send("/admindashboard");
                             } else {
                                 res.send("/loginIndex");
@@ -194,6 +194,23 @@ app.post("/changepass", function (req, res) {
 //---- get user ----
 app.get("/getuserinfo", (req, res) => {
     const sql = "SELECT username, first_name, last_name, email, gender, password FROM user";
+    con.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Database server error");
+        } else {
+            res.json(result);
+        }
+    });
+});
+
+//---- Get user info where username already login
+app.post("/getuserInfo", (req, res) => {
+
+    const userKey = req.body.userKey;
+    //console.log(userKey);
+
+    const sql = "SELECT first_name, last_name, email, gender, password FROM user WHERE username ='$userKey'";
     con.query(sql, function (err, result) {
         if (err) {
             console.log(err);
