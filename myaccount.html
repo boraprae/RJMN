@@ -201,6 +201,17 @@
                 alert(xhr.responseText);
             });
 
+            $.ajax({
+                type: "POST",
+                url: "/getuserinfo",
+                success: function (response) {
+                    console.log(response);
+                    $("#nameUser").html(response[0].first_name + response[0].last_name);
+                }
+            }).fail(function (xhr, state) {
+                alert(xhr.responseText);
+            });
+
            
         });
     </script>
@@ -262,7 +273,7 @@
                                                 <div class="m-b-20">
                                                     <img src="https://img.icons8.com/bubbles/100/000000/user.png">
                                                 </div>
-                                                <h6 class="f-w-600">Park Jimin</h6>
+                                                <h6 class="f-w-600">Kim Jannie</h6>
                                             </div>
                                         </div>
                                         <div class="col-sm-8">
@@ -270,25 +281,25 @@
                                                 <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <p class="m-b-10 f-w-600">Name</p>
-                                                        <h6 class="text-muted f-w-400">Park Jimin</h6>
+                                                        <p class="m-b-10 f-w-600" >Name</p>
+                                                        <h6 class="text-muted f-w-400" id="nameUser">Kim jannie</h6>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <p class="m-b-10 f-w-600">Gender</p>
-                                                        <h6 class="text-muted f-w-400">Male</h6>
+                                                        <p class="m-b-10 f-w-600" >Gender</p>
+                                                        <h6 class="text-muted f-w-400" id="genderUser">Female</h6>
                                                     </div>
                                                 </div>
                                                 <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"></h6>
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <p class="m-b-10 f-w-600">Email</p>
-                                                        <h6 class="text-muted f-w-400">parkjimin@gmail.com</h6>
+                                                        <p class="m-b-10 f-w-600" >Email</p>
+                                                        <h6 class="text-muted f-w-400" id="userEmail">kimjannie@gmail.com</h6>
                                                     </div>
-                                                    <div class="col-sm-6">
+                                                    <!-- <div class="col-sm-6">
                                                         <p class="m-b-10 f-w-600">Date of Birth</p>
                                                         <h6 class="text-muted f-w-400">October 13, 1995</h6>
                                                         <br>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                         </div>
